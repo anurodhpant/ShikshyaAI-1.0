@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SHIKSHYA AI - Super Admin Global Command Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: { extend: {
+    "colors": {
+      "primary-fixed":"#dae2fd","on-tertiary-container":"#009668","error":"#ba1a1a",
+      "outline":"#76777d","surface-variant":"#d3e4fe","tertiary-fixed-dim":"#4edea3",
+      "on-tertiary-fixed":"#002113","surface":"#f8f9ff","surface-container-high":"#dce9ff",
+      "background":"#f8f9ff","on-primary":"#ffffff","surface-container-highest":"#d3e4fe",
+      "secondary-container":"#316bf3","on-secondary-container":"#fefcff","on-primary-fixed":"#131b2e",
+      "outline-variant":"#c6c6cd","primary-fixed-dim":"#bec6e0","surface-tint":"#565e74",
+      "on-tertiary-fixed-variant":"#005236","surface-bright":"#f8f9ff","on-tertiary":"#ffffff",
+      "on-surface":"#0b1c30","surface-container-lowest":"#ffffff","inverse-primary":"#bec6e0",
+      "tertiary":"#000000","on-error-container":"#93000a","on-error":"#ffffff",
+      "surface-dim":"#cbdbf5","on-surface-variant":"#45464d","inverse-surface":"#213145",
+      "surface-container-low":"#eff4ff","on-primary-fixed-variant":"#3f465c","tertiary-container":"#002113",
+      "on-secondary-fixed":"#00174b","secondary-fixed":"#dbe1ff","inverse-on-surface":"#eaf1ff",
+      "tertiary-fixed":"#6ffbbe","error-container":"#ffdad6","primary-container":"#131b2e",
+      "surface-container":"#e5eeff","on-secondary-fixed-variant":"#003ea8","on-secondary":"#ffffff",
+      "secondary":"#0051d5","secondary-fixed-dim":"#b4c5ff","primary":"#000000",
+      "on-background":"#0b1c30","on-primary-container":"#7c839b"
+    },
+    "borderRadius": { "DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px" },
+    "fontFamily": {
+      "label-sm":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],
+      "body-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],
+      "body-lg":["Plus Jakarta Sans"],"headline-xl":["Plus Jakarta Sans"],
+      "stat-sub":["JetBrains Mono"],"stat-display":["JetBrains Mono"],
+      "headline-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],
+      "headline-lg-mobile":["Plus Jakarta Sans"]
+    },
+    "fontSize": {
+      "label-sm":["11px",{"lineHeight":"14px","fontWeight":"600"}],
+      "label-md":["13px",{"lineHeight":"16px","fontWeight":"600"}],
+      "body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],
+      "headline-lg":["24px",{"lineHeight":"32px","fontWeight":"700"}],
+      "body-lg":["15px",{"lineHeight":"22px","fontWeight":"500"}],
+      "headline-xl":["30px",{"lineHeight":"38px","fontWeight":"700"}],
+      "stat-sub":["12px",{"lineHeight":"16px","fontWeight":"500"}],
+      "stat-display":["26px",{"lineHeight":"32px","fontWeight":"700"}],
+      "headline-md":["18px",{"lineHeight":"26px","fontWeight":"600"}],
+      "body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],
+      "headline-lg-mobile":["20px",{"lineHeight":"28px","fontWeight":"700"}]
+    }
+  }}
+}
+</script>
+<link rel="stylesheet" href="/static/css/styles.css"/>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen pb-24">
+<header class="w-full bg-surface-container-lowest px-4 md:px-8 flex justify-between items-center h-16 shadow-sm sticky top-0 z-40">
+  <div class="flex items-center gap-2">
+    <div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-primary-fixed shadow-sm">
+      <span class="material-symbols-outlined text-lg">auto_awesome</span>
+    </div>
+    <div>
+      <div class="flex items-center gap-1.5">
+        <span class="text-headline-md font-headline-md font-bold tracking-tight text-primary leading-tight">SHIKSHYA AI</span>
+        <span class="bg-primary text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wide">CDC</span>
+      </div>
+      <p class="text-label-sm font-label-sm text-on-surface-variant flex items-center gap-1">
+        <span>Anurodh Pant</span><span>·</span>
+        <span class="text-secondary font-medium">National CDC Authority</span>
+      </p>
+    </div>
+  </div>
+  <div class="flex items-center gap-2">
+    <button aria-label="Notifications" class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container relative">
+      <span class="material-symbols-outlined text-on-surface">notifications</span>
+      <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-surface-container-lowest"></span>
+    </button>
+    <button id="logoutBtn" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant text-on-surface hover:bg-surface-container-high" title="Logout">
+      <span class="material-symbols-outlined text-2xl">account_circle</span>
+    </button>
+  </div>
+</header>
+
+<div class="w-full bg-surface-container-lowest border-b border-surface-container-high overflow-x-auto no-scrollbar shadow-xs">
+  <div class="flex items-center px-4 space-x-1 min-w-max py-1">
+    <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface px-3 py-2 flex items-center gap-1.5" href="/super-admin">
+      <span class="material-symbols-outlined text-base">hub</span> Role Directory
+    </a>
+    <a class="text-primary border-b-2 border-primary font-label-md text-label-md px-3 py-2 flex items-center gap-1.5 font-bold" href="/super-admin">
+      <span class="material-symbols-outlined text-base">admin_panel_settings</span> Super Admin Webpage
+    </a>
+    <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface px-3 py-2 flex items-center gap-1.5" href="/school-admin">
+      <span class="material-symbols-outlined text-base">domain</span> School Admin Webpage
+    </a>
+    <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface px-3 py-2 flex items-center gap-1.5" href="/teacher">
+      <span class="material-symbols-outlined text-base">school</span> Teacher Webpage
+    </a>
+    <a class="text-on-surface-variant font-label-md text-label-md hover:text-on-surface px-3 py-2 flex items-center gap-1.5" href="/student">
+      <span class="material-symbols-outlined text-base">face</span> Student Webpage
+    </a>
+  </div>
+</div>
+
+<main class="px-4 py-4 max-w-7xl mx-auto space-y-4">
+  <!-- (body of super admin page unchanged from previous version) -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+    <div>
+      <div class="flex items-center gap-2 mb-0.5">
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant text-[11px] font-mono font-medium">
+          <span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container animate-pulse"></span>
+          Node: Kathmandu Central CDC
+        </span>
+        <span class="text-[11px] font-mono text-outline">v2.4.9</span>
+      </div>
+      <h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-primary tracking-tight">
+        Super Admin Global Command Dashboard
+      </h1>
+    </div>
+    <button class="flex items-center justify-center gap-1.5 bg-primary text-on-primary font-label-md text-label-md h-9 px-4 rounded-lg shadow-sm active:scale-95">
+      <span class="material-symbols-outlined text-base">add</span> Add School
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/60 shadow-sm">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-label-md font-label-md text-on-surface-variant">Enrolled Schools</span>
+        <span class="w-7 h-7 rounded-md bg-surface-container flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-lg">account_balance</span>
+        </span>
+      </div>
+      <div class="mb-2"><div class="text-stat-display font-stat-display text-primary tracking-tight">4</div></div>
+      <div class="pt-2 border-t border-surface-container text-stat-sub text-on-surface-variant text-[12px]">
+        <span class="text-on-tertiary-container">● 3 Active</span> · <span class="text-error">▲ 1 Suspended</span>
+      </div>
+    </div>
+    <div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/60 shadow-sm">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-label-md font-label-md text-on-surface-variant">Global Users</span>
+        <span class="w-7 h-7 rounded-md bg-surface-container flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-lg">group</span>
+        </span>
+      </div>
+      <div class="mb-2"><div class="text-stat-display font-stat-display text-primary tracking-tight">11</div></div>
+      <div class="pt-2 border-t border-surface-container text-stat-sub text-on-surface-variant text-[12px]">5 Students · 3 Teachers · 3 Admins</div>
+    </div>
+    <div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/60 shadow-sm">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-label-md font-label-md text-on-surface-variant">CDC Curriculum</span>
+        <span class="w-7 h-7 rounded-md bg-surface-container flex items-center justify-center text-secondary">
+          <span class="material-symbols-outlined text-lg">menu_book</span>
+        </span>
+      </div>
+      <div class="mb-2"><div class="text-stat-display font-stat-display text-primary tracking-tight">8</div></div>
+      <div class="pt-2 border-t border-surface-container text-stat-sub text-on-surface-variant text-[12px]">11 Chapters · 12 Topics</div>
+    </div>
+    <div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/60 shadow-sm">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-label-md font-label-md text-on-surface-variant">AI Content</span>
+        <span class="w-7 h-7 rounded-md bg-surface-container flex items-center justify-center text-secondary">
+          <span class="material-symbols-outlined text-lg">psychology</span>
+        </span>
+      </div>
+      <div class="mb-2"><div class="text-stat-display font-stat-display text-primary tracking-tight">3</div></div>
+      <div class="pt-2 border-t border-surface-container text-stat-sub text-on-surface-variant text-[12px]">2 Approved · 1 Under Review</div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 shadow-sm overflow-hidden">
+    <div class="p-4 border-b border-surface-container flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-xl">domain</span>
+        <h2 class="text-headline-md font-headline-md text-primary">Recent Schools</h2>
+      </div>
+    </div>
+    <div id="schoolsList" class="divide-y divide-surface-container"></div>
+  </div>
+
+  <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 shadow-sm p-4 space-y-3">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-xl">shield</span>
+        <h2 class="text-headline-md font-headline-md text-primary">Platform Audit Logs &amp; Security</h2>
+      </div>
+      <div class="flex items-center gap-1 text-on-tertiary-container text-[12px] bg-[#ecfdf5] px-2 py-0.5 rounded border border-[#a7f3d0]">
+        <span class="material-symbols-outlined text-sm">lock</span> Zero Credential Leakage
+      </div>
+    </div>
+    <div id="auditList" class="space-y-2.5"></div>
+  </div>
+</main>
+
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface-container-lowest shadow-lg md:hidden">
+  <a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl px-3 py-1.5" href="/super-admin">
+    <span class="material-symbols-outlined text-xl">dashboard</span><span class="text-label-sm mt-0.5">Dashboard</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5" href="/school-admin">
+    <span class="material-symbols-outlined text-xl">domain</span><span class="text-label-sm mt-0.5">Schools</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5" href="/teacher">
+    <span class="material-symbols-outlined text-xl">menu_book</span><span class="text-label-sm mt-0.5">Teacher</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5" href="/student">
+    <span class="material-symbols-outlined text-xl">smart_toy</span><span class="text-label-sm mt-0.5">Student</span>
+  </a>
+  <button id="mobileLogout" class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5">
+    <span class="material-symbols-outlined text-xl">logout</span><span class="text-label-sm mt-0.5">Logout</span>
+  </button>
+</nav>
+
+<script src="/static/js/api.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  // Logout handlers
+  document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+    await window.API.logout();
+    window.location.href = '/auth';
+  });
+  document.getElementById('mobileLogout')?.addEventListener('click', async () => {
+    await window.API.logout();
+    window.location.href = '/auth';
+  });
+
+  // Load schools
+  try {
+    const { schools } = await window.API.getSchools();
+    const list = document.getElementById('schoolsList');
+    list.innerHTML = schools.map(s => `
+      <div class="p-4 flex flex-col gap-2 hover:bg-surface-container-low/50 transition-colors">
+        <div class="flex items-start justify-between">
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-bold text-body-lg text-primary">${s.name}</h3>
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold ${s.status === 'active' ? 'bg-[#ecfdf5] text-on-tertiary-container border border-[#a7f3d0]' : 'bg-[#fffbeb] text-[#92400e] border border-[#fde68a]'}">
+                ${s.status === 'active' ? 'Active' : 'Suspended'}
+              </span>
+            </div>
+            <p class="text-body-sm text-on-surface-variant mt-0.5">${s.province} · Code: ${s.id} · Classes ${s.classes}</p>
+          </div>
+          <button class="px-3 py-1 text-label-md bg-surface-container text-on-surface rounded-md hover:bg-surface-container-high">Manage</button>
+        </div>
+        <div class="flex items-center gap-4 text-stat-sub text-on-surface-variant text-[12px] pt-1">
+          <span>${s.students} Students</span>·<span>${s.teachers} Teachers</span>·
+          <span class="text-secondary">AI: ${s.aiEnabled}%</span>
+        </div>
+      </div>
+    `).join('');
+  } catch (err) { console.warn(err); }
+
+  // Load audit logs
+  try {
+    const { logs } = await window.API.getAuditLogs();
+    const el = document.getElementById('auditList');
+    el.innerHTML = logs.map(l => `
+      <div class="flex items-start gap-2.5 p-2 rounded-lg hover:bg-surface-container-low">
+        <div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0 mt-0.5">
+          <span class="material-symbols-outlined text-sm">${l.icon || 'info'}</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-body-sm text-primary font-medium">${l.action}</p>
+          <p class="text-stat-sub text-on-surface-variant text-[11px] truncate">${l.user} · ${l.target} · ${l.time}</p>
+        </div>
+        <span class="text-[10px] ${l.result === 'BLOCKED' ? 'text-error' : 'text-outline'}">${l.result}</span>
+      </div>
+    `).join('');
+  } catch (err) { console.warn(err); }
+});
+</script>
+</body></html>

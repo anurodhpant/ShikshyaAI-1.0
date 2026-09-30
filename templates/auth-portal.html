@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SHIKSHYA AI — Sign In / Sign Up</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link rel="stylesheet" href="/static/css/styles.css"/>
+<style>
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8f9ff; }
+  .card-shadow { box-shadow: 0 4px 24px rgba(15, 23, 42, 0.04); }
+  .role-box { transition: all .18s ease; cursor: pointer; }
+  .role-box:hover { transform: translateY(-3px); border-color: #1d4ed8; box-shadow: 0 12px 28px rgba(29,78,216,0.15); }
+  .hidden { display: none !important; }
+  .tab-active { background: white; color: #1d4ed8; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+  .tab-inactive { color: #45464d; }
+</style>
+</head>
+<body class="min-h-screen text-[#0b1c30] py-10 px-4">
+
+<div class="w-full max-w-6xl mx-auto">
+
+  <div class="text-center mb-8">
+    <div class="w-14 h-14 rounded-2xl bg-[#1d4ed8] flex items-center justify-center text-white mx-auto shadow-lg shadow-blue-500/30">
+      <span class="material-symbols-outlined text-2xl">auto_awesome</span>
+    </div>
+    <h1 class="mt-4 text-2xl font-extrabold tracking-tight">SHIKSHYA AI</h1>
+    <p class="text-sm text-[#45464d] mt-1">Nepal MoEST &amp; CDC Unified Educational Platform</p>
+  </div>
+
+  <!-- STEP 1: Role picker -->
+  <div id="stepRoles">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl font-bold tracking-tight">Welcome to Shikshya AI</h2>
+      <p class="text-sm text-[#45464d] mt-1">Choose your role to sign in or create an account</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+      <div onclick="chooseRole('superadmin')" class="role-box card-shadow bg-white border border-[#e2e8f0] rounded-2xl p-6 text-left">
+        <div class="w-12 h-12 rounded-xl bg-[#fee2e2] flex items-center justify-center text-[#dc2626] mb-4">
+          <span class="material-symbols-outlined text-2xl">shield_person</span>
+        </div>
+        <h3 class="font-bold text-lg">Super Admin</h3>
+        <p class="text-sm text-[#45464d] mt-1">National MoEST &amp; CDC command access</p>
+        <div class="mt-4 text-[#1d4ed8] text-sm font-semibold flex items-center gap-1">
+          Continue <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </div>
+      </div>
+
+      <div onclick="chooseRole('schooladmin')" class="role-box card-shadow bg-white border border-[#e2e8f0] rounded-2xl p-6 text-left">
+        <div class="w-12 h-12 rounded-xl bg-[#dbeafe] flex items-center justify-center text-[#1d4ed8] mb-4">
+          <span class="material-symbols-outlined text-2xl">corporate_fare</span>
+        </div>
+        <h3 class="font-bold text-lg">School Admin</h3>
+        <p class="text-sm text-[#45464d] mt-1">Institutional management console</p>
+        <div class="mt-4 text-[#1d4ed8] text-sm font-semibold flex items-center gap-1">
+          Continue <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </div>
+      </div>
+
+      <div onclick="chooseRole('teacher')" class="role-box card-shadow bg-white border border-[#e2e8f0] rounded-2xl p-6 text-left">
+        <div class="w-12 h-12 rounded-xl bg-[#dcfce7] flex items-center justify-center text-[#16a34a] mb-4">
+          <span class="material-symbols-outlined text-2xl">school</span>
+        </div>
+        <h3 class="font-bold text-lg">Teacher</h3>
+        <p class="text-sm text-[#45464d] mt-1">Class manager, uploads &amp; AI tools</p>
+        <div class="mt-4 text-[#1d4ed8] text-sm font-semibold flex items-center gap-1">
+          Continue <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </div>
+      </div>
+
+      <div onclick="chooseRole('student')" class="role-box card-shadow bg-white border border-[#e2e8f0] rounded-2xl p-6 text-left">
+        <div class="w-12 h-12 rounded-xl bg-[#fef3c7] flex items-center justify-center text-[#d97706] mb-4">
+          <span class="material-symbols-outlined text-2xl">face</span>
+        </div>
+        <h3 class="font-bold text-lg">Student</h3>
+        <p class="text-sm text-[#45464d] mt-1">Classes 6–12 learning &amp; AI tutor</p>
+        <div class="mt-4 text-[#1d4ed8] text-sm font-semibold flex items-center gap-1">
+          Continue <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Sign in / Sign up form -->
+  <div id="stepForm" class="hidden">
+    <div class="max-w-lg mx-auto">
+
+      <button onclick="goBack()" class="mb-4 flex items-center gap-1.5 text-sm text-[#45464d] hover:text-[#1d4ed8]">
+        <span class="material-symbols-outlined text-base">arrow_back</span> Change role
+      </button>
+
+      <div class="card-shadow bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8">
+
+        <!-- Role header -->
+        <div class="flex items-center gap-3 mb-5">
+          <div id="roleIconWrap" class="w-11 h-11 rounded-xl flex items-center justify-center bg-[#dbeafe] text-[#1d4ed8]">
+            <span id="roleIcon" class="material-symbols-outlined text-2xl">face</span>
+          </div>
+          <div>
+            <p class="text-xs font-bold tracking-widest text-[#1d4ed8] uppercase" id="formKicker">Welcome back</p>
+            <h2 class="text-xl font-bold tracking-tight" id="formTitle">Sign in as Student</h2>
+          </div>
+        </div>
+
+        <!-- Tab switcher -->
+        <div class="flex gap-1 p-1 bg-[#f1f5f9] rounded-lg mb-6">
+          <button id="tabLogin" type="button" onclick="switchTab('login')"
+            class="tab-active flex-1 py-2 rounded-md text-sm font-semibold transition-all">
+            Sign In
+          </button>
+          <button id="tabSignup" type="button" onclick="switchTab('signup')"
+            class="tab-inactive flex-1 py-2 rounded-md text-sm font-semibold transition-all hover:text-[#0b1c30]">
+            Sign Up
+          </button>
+        </div>
+
+        <!-- ==================== SIGN IN FORM ==================== -->
+        <form id="loginForm" class="space-y-4" onsubmit="handleLogin(event)">
+          <div>
+            <label class="block text-sm font-semibold mb-1.5" for="email">Email address</label>
+            <input id="email" type="email" required
+              class="w-full px-3.5 py-2.5 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]"/>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold mb-1.5" for="phone">Phone number</label>
+            <input id="phone" type="tel"
+              class="w-full px-3.5 py-2.5 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]"
+              placeholder="+977-98XXXXXXXX"/>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold mb-1.5" for="address">Address</label>
+            <input id="address" type="text"
+              class="w-full px-3.5 py-2.5 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]"
+              placeholder="e.g. Kathmandu, Bagmati"/>
+          </div>
+
+          <div id="schoolField">
+            <label class="block text-sm font-semibold mb-1.5" for="school">School</label>
+            <select id="school"
+              class="w-full px-3.5 py-2.5 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]">
+              <option value="">— Select school —</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold mb-1.5" for="password">Password</label>
+            <div class="relative">
+              <input id="password" type="password" required
+                class="w-full px-3.5 py-2.5 pr-10 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]"
+                placeholder="Enter your password"/>
+              <button type="button" onclick="togglePassword('password','pwIcon')"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-[#45464d]">
+                <span id="pwIcon" class="material-symbols-outlined text-lg">visibility</span>
+              </button>
+            </div>
+          </div>
+
+          <button id="submitBtn" type="submit"
+            class="w-full py-3 rounded-lg bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-semibold text-sm flex items-center justify-center gap-2 transition-all active:scale-[0.99]">
+            <span id="submitText">Sign In</span>
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </button>
+
+          <div id="loginError" class="hidden text-sm text-[#ba1a1a] bg-[#ffdad6] border border-[#fecaca] rounded-lg px-3 py-2"></div>
+
+          <div class="p-3.5 rounded-lg bg-[#eff6ff] border border-[#dbeafe]">
+            <p class="text-xs font-bold text-[#1d4ed8]">Demo credentials (<span id="demoRole">student</span>)</p>
+            <p id="demoCreds" class="text-xs text-[#45464d] mt-1 font-mono">student.aarav@kmhss.edu.np / student123</p>
+          </div>
+        </form>
+
+        <!-- ==================== SIGN UP FORM ==================== -->
+        <form id="signupForm" class="space-y-4 hidden" onsubmit="handleSignup(event)">
+
+          <div>
+            <label class="block text-sm font-semibold mb-1.5" for="su_name">Full name <span class="text-[#ba1a1a]">*</span></label>
+            <input id="su_name" type="text" required
+              class="w-full px-3.5 py-2.5 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]"
+              placeholder="e.g. Aarav Shrestha"/>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold mb-1.5" for="su_email">Email address <span class="text-[#ba1a1a]">*</span></label>
+            <input id="su_email" type="email" required
+              class="w-full px-3.5 py-2.5 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]"
+              placeholder="you@example.com"/>
+            <p class="text-xs text-[#76777d] mt-1">Any email address is accepted.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm font-semibold mb-1.5" for="su_phone">Phone number</label>
+              <input id="su_phone" type="tel"
+                class="w-full px-3.5 py-2.5 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]"
+                placeholder="+977-98XXXXXXXX"/>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-1.5" for="su_address">Address</label>
+              <input id="su_address" type="text"
+                class="w-full px-3.5 py-2.5 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]"
+                placeholder="e.g. Lalitpur"/>
+            </div>
+          </div>
+
+          <div id="su_schoolField">
+            <label class="block text-sm font-semibold mb-1.5" for="su_school">School</label>
+            <select id="su_school"
+              class="w-full px-3.5 py-2.5 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]">
+              <option value="">— Select school —</option>
+            </select>
+          </div>
+
+          <div id="su_classField">
+            <label class="block text-sm font-semibold mb-1.5" for="su_class">Class</label>
+            <select id="su_class"
+              class="w-full px-3.5 py-2.5 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]">
+              <option value="6">Class 6</option>
+              <option value="7">Class 7</option>
+              <option value="8">Class 8</option>
+              <option value="9">Class 9</option>
+              <option value="10" selected>Class 10</option>
+              <option value="11">Class 11</option>
+              <option value="12">Class 12</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold mb-1.5" for="su_password">Password <span class="text-[#ba1a1a]">*</span></label>
+            <div class="relative">
+              <input id="su_password" type="password" required minlength="4"
+                class="w-full px-3.5 py-2.5 pr-10 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]"
+                placeholder="At least 4 characters"/>
+              <button type="button" onclick="togglePassword('su_password','su_pwIcon')"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-[#45464d]">
+                <span id="su_pwIcon" class="material-symbols-outlined text-lg">visibility</span>
+              </button>
+            </div>
+          </div>
+
+          <button id="signupBtn" type="submit"
+            class="w-full py-3 rounded-lg bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-semibold text-sm flex items-center justify-center gap-2 transition-all active:scale-[0.99]">
+            <span id="signupText">Create Account</span>
+            <span class="material-symbols-outlined text-base">person_add</span>
+          </button>
+
+          <div id="signupError" class="hidden text-sm text-[#ba1a1a] bg-[#ffdad6] border border-[#fecaca] rounded-lg px-3 py-2"></div>
+
+          <p class="text-xs text-center text-[#76777d]">
+            By creating an account you agree to Shikshya AI's terms &amp; privacy policy.
+          </p>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="/static/js/api.js"></script>
+<script src="/static/js/auth.js"></script>
+</body></html>

@@ -1,0 +1,1076 @@
+{
+  "schools": [
+    {
+      "id": "KTM-0842",
+      "name": "Kathmandu Model Secondary School",
+      "province": "Bagmati",
+      "classes": "6-12",
+      "status": "active",
+      "students": 540,
+      "teachers": 28,
+      "aiEnabled": 98
+    },
+    {
+      "id": "PKR-0119",
+      "name": "Pokhara Higher Academy",
+      "province": "Gandaki",
+      "classes": "8-12",
+      "status": "active",
+      "students": 320,
+      "teachers": 19,
+      "aiEnabled": 91
+    },
+    {
+      "id": "LTP-0034",
+      "name": "Lalitpur CDC Public School",
+      "province": "Bagmati",
+      "classes": "6-10",
+      "status": "suspended",
+      "students": 410,
+      "teachers": 22,
+      "aiEnabled": 0
+    },
+    {
+      "id": "BRT-0451",
+      "name": "Biratnagar National Secondary",
+      "province": "Koshi",
+      "classes": "6-12",
+      "status": "active",
+      "students": 480,
+      "teachers": 25,
+      "aiEnabled": 87
+    }
+  ],
+  "users": [
+    {
+      "id": "u1",
+      "email": "superadmin.cdc@moest.gov.np",
+      "phone": "+977-9800000001",
+      "address": "CDC Sanothimi, Bhaktapur",
+      "password": "admin123",
+      "role": "superadmin",
+      "name": "Anurodh Pant"
+    },
+    {
+      "id": "u2",
+      "email": "principal@kmhss.edu.np",
+      "phone": "+977-9800000002",
+      "address": "Kathmandu Model Higher Sec School, Bagmati",
+      "password": "admin123",
+      "role": "schooladmin",
+      "name": "Principal KMHSS",
+      "schoolId": "KTM-0842"
+    },
+    {
+      "id": "u3",
+      "email": "t.subedi@kmhss.edu.np",
+      "phone": "+977-9800000003",
+      "address": "Lalitpur, Bagmati",
+      "password": "teacher123",
+      "role": "teacher",
+      "name": "Sunita Rai",
+      "schoolId": "KTM-0842"
+    },
+    {
+      "id": "u4",
+      "email": "student.aarav@kmhss.edu.np",
+      "phone": "+977-9800000004",
+      "address": "Kathmandu, Bagmati",
+      "password": "student123",
+      "role": "student",
+      "name": "Aarav Shrestha",
+      "schoolId": "KTM-0842",
+      "classLevel": "10"
+    },
+    {
+      "id": "u1790784320559",
+      "email": "anurodhpant@gmail.com",
+      "phone": "9845675432",
+      "address": "Lalitpur",
+      "password": "aaaa0011",
+      "role": "student",
+      "name": "Anurodh Pant",
+      "schoolId": "LTP-0034",
+      "classLevel": "10"
+    },
+    {
+      "id": "u1790784488637",
+      "email": "an@gmail.com",
+      "phone": "9845675433",
+      "address": "Lalitpur",
+      "password": "1234",
+      "role": "student",
+      "name": "Anurodh Pant",
+      "schoolId": "LTP-0034",
+      "classLevel": "6"
+    }
+  ],
+  "curriculum": [
+    {
+      "id": "c10-sci",
+      "class": "10",
+      "subject": "Science & Technology",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 21,
+      "problems": null,
+      "videos": 24,
+      "prepared": 58,
+      "topic": "Heredity & Genetics"
+    },
+    {
+      "id": "c10-math",
+      "class": "10",
+      "subject": "Compulsory Mathematics",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 18,
+      "problems": 340,
+      "videos": null,
+      "prepared": 42,
+      "topic": "Algebra"
+    },
+    {
+      "id": "c10-eng",
+      "class": "10",
+      "subject": "Compulsory English",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 14,
+      "problems": null,
+      "videos": null,
+      "prepared": 35,
+      "topic": "Grammar"
+    },
+    {
+      "id": "c10-nep",
+      "class": "10",
+      "subject": "Nepali",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 16,
+      "problems": null,
+      "videos": 12,
+      "prepared": 25,
+      "topic": "Kavita"
+    },
+    {
+      "id": "c10-soc",
+      "class": "10",
+      "subject": "Social Studies",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 10,
+      "problems": null,
+      "videos": 15,
+      "prepared": 50,
+      "topic": "Civics"
+    },
+    {
+      "id": "c10-optm",
+      "class": "10",
+      "subject": "Optional Mathematics",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 14,
+      "problems": null,
+      "videos": 20,
+      "prepared": 18,
+      "topic": "Vectors"
+    },
+    {
+      "id": "c10-comp",
+      "class": "10",
+      "subject": "Computer Science",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 12,
+      "problems": 120,
+      "videos": null,
+      "prepared": 44,
+      "topic": "Programming"
+    },
+    {
+      "id": "c9-math",
+      "class": "9",
+      "subject": "Compulsory Mathematics",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 15,
+      "problems": 280,
+      "videos": null,
+      "prepared": 60,
+      "topic": "Algebra"
+    },
+    {
+      "id": "c9-sci",
+      "class": "9",
+      "subject": "Science & Technology",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 19,
+      "problems": null,
+      "videos": 18,
+      "prepared": 52,
+      "topic": "Force"
+    },
+    {
+      "id": "c9-eng",
+      "class": "9",
+      "subject": "Compulsory English",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 12,
+      "problems": null,
+      "videos": null,
+      "prepared": 48,
+      "topic": "Reading"
+    },
+    {
+      "id": "c9-nep",
+      "class": "9",
+      "subject": "Nepali",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 14,
+      "problems": null,
+      "videos": null,
+      "prepared": 40,
+      "topic": "Nibandha"
+    },
+    {
+      "id": "c8-math",
+      "class": "8",
+      "subject": "Mathematics",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 14,
+      "problems": 200,
+      "videos": null,
+      "prepared": 55,
+      "topic": "Geometry"
+    },
+    {
+      "id": "c8-sci",
+      "class": "8",
+      "subject": "Science",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 20,
+      "problems": null,
+      "videos": 16,
+      "prepared": 46,
+      "topic": "Matter"
+    },
+    {
+      "id": "c8-eng",
+      "class": "8",
+      "subject": "English",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 11,
+      "problems": null,
+      "videos": null,
+      "prepared": 50,
+      "topic": "Writing"
+    },
+    {
+      "id": "c8-nep",
+      "class": "8",
+      "subject": "Nepali",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 13,
+      "problems": null,
+      "videos": null,
+      "prepared": 44,
+      "topic": "Katha"
+    },
+    {
+      "id": "c7-math",
+      "class": "7",
+      "subject": "Mathematics",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 12,
+      "problems": 180,
+      "videos": null,
+      "prepared": 62,
+      "topic": "Integers"
+    },
+    {
+      "id": "c7-sci",
+      "class": "7",
+      "subject": "Science",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 18,
+      "problems": null,
+      "videos": 14,
+      "prepared": 55,
+      "topic": "Living Beings"
+    },
+    {
+      "id": "c7-eng",
+      "class": "7",
+      "subject": "English",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 10,
+      "problems": null,
+      "videos": null,
+      "prepared": 60,
+      "topic": "Grammar"
+    },
+    {
+      "id": "c6-math",
+      "class": "6",
+      "subject": "Mathematics",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 10,
+      "problems": 150,
+      "videos": null,
+      "prepared": 70,
+      "topic": "Basic Algebra"
+    },
+    {
+      "id": "c6-sci",
+      "class": "6",
+      "subject": "Science",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 15,
+      "problems": null,
+      "videos": 12,
+      "prepared": 60,
+      "topic": "Plants"
+    },
+    {
+      "id": "c6-eng",
+      "class": "6",
+      "subject": "English",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 10,
+      "problems": null,
+      "videos": null,
+      "prepared": 66,
+      "topic": "Reading"
+    },
+    {
+      "id": "c6-nep",
+      "class": "6",
+      "subject": "Nepali",
+      "code": "CDC 2081 Syllabus",
+      "chapters": 12,
+      "problems": null,
+      "videos": null,
+      "prepared": 58,
+      "topic": "Kavita"
+    },
+    {
+      "id": "c11-phy",
+      "class": "11",
+      "subject": "Physics",
+      "code": "NEB Grade 11",
+      "chapters": 22,
+      "problems": 260,
+      "videos": 18,
+      "prepared": 30,
+      "topic": "Mechanics"
+    },
+    {
+      "id": "c11-chem",
+      "class": "11",
+      "subject": "Chemistry",
+      "code": "NEB Grade 11",
+      "chapters": 20,
+      "problems": 240,
+      "videos": 20,
+      "prepared": 28,
+      "topic": "Atomic Structure"
+    },
+    {
+      "id": "c11-math",
+      "class": "11",
+      "subject": "Mathematics",
+      "code": "NEB Grade 11",
+      "chapters": 18,
+      "problems": 220,
+      "videos": null,
+      "prepared": 32,
+      "topic": "Calculus"
+    },
+    {
+      "id": "c12-phy",
+      "class": "12",
+      "subject": "Physics",
+      "code": "NEB Grade 12",
+      "chapters": 24,
+      "problems": 300,
+      "videos": 22,
+      "prepared": 25,
+      "topic": "Electromagnetism"
+    },
+    {
+      "id": "c12-chem",
+      "class": "12",
+      "subject": "Chemistry",
+      "code": "NEB Grade 12",
+      "chapters": 22,
+      "problems": 280,
+      "videos": 24,
+      "prepared": 22,
+      "topic": "Organic Chemistry"
+    },
+    {
+      "id": "c12-math",
+      "class": "12",
+      "subject": "Mathematics",
+      "code": "NEB Grade 12",
+      "chapters": 20,
+      "problems": 260,
+      "videos": null,
+      "prepared": 28,
+      "topic": "Vectors"
+    }
+  ],
+  "uploads": [
+    {
+      "id": "up1790784401596",
+      "title": "Math",
+      "filename": "0d771b35_grade-6-mathematics.pdf",
+      "originalName": "grade-6-mathematics.pdf",
+      "ext": "pdf",
+      "sizeKB": 22656.6,
+      "subject": "Mathematics",
+      "classLevel": "6",
+      "uploadedBy": "Anurodh Pant",
+      "uploadedById": "u1790784320559",
+      "uploadedAt": "2026-09-30T16:06:41.598647Z",
+      "url": "/static/uploads/0d771b35_grade-6-mathematics.pdf"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "a1790785152464",
+      "action": "Login successful",
+      "user": "Anurodh Pant",
+      "target": "role:student",
+      "ip": "127.0.0.1",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
+    },
+    {
+      "id": "a1790784532778",
+      "action": "Login successful",
+      "user": "Anurodh Pant",
+      "target": "role:teacher",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
+    },
+    {
+      "id": "a1790784526899",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784526263",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784525318",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784488673",
+      "action": "User Registered",
+      "user": "Anurodh Pant",
+      "target": "role:student · an@gmail.com",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "person_add"
+    },
+    {
+      "id": "a1790784443187",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784401637",
+      "action": "Study Material Uploaded",
+      "user": "Anurodh Pant",
+      "target": "6 · Mathematics · grade-6-mathematics.pdf",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "upload_file"
+    },
+    {
+      "id": "a1790784320629",
+      "action": "User Registered",
+      "user": "Anurodh Pant",
+      "target": "role:teacher · anurodhpant@gmail.com",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "person_add"
+    },
+    {
+      "id": "a1790784124898",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784124698",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784124454",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784123993",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784121016",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784120870",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784120707",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784120482",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784119868",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784119697",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784119497",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784119287",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784119090",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784118899",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790784116891",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "192.168.1.72",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783824214",
+      "action": "Login successful",
+      "user": "Aarav Shrestha",
+      "target": "role:student",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
+    },
+    {
+      "id": "a1790783780277",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783779624",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783779274",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783778972",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783778791",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783778451",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783778221",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783778080",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783777895",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783777012",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783776011",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783774378",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783629415",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783629011",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783627505",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783627265",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783626726",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783626474",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783626048",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783625483",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783625253",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783625022",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783624815",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783624600",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783624376",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783623809",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783616693",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783616212",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783612929",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783612655",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783612389",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783612178",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783611344",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783595870",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783594126",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1790783592321",
+      "action": "Login failed",
+      "user": "anurodhpant@gmail.com",
+      "target": "auth",
+      "ip": "127.0.0.1",
+      "result": "FAILED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1",
+      "action": "API Token Generated",
+      "user": "Anurodh Pant",
+      "target": "KTM Model Secondary",
+      "ip": "202.70.76.12",
+      "result": "SUCCESS",
+      "time": "8 mins ago",
+      "icon": "key"
+    },
+    {
+      "id": "a2",
+      "action": "CDC Curriculum Index Synced",
+      "user": "System",
+      "target": "Class 9 Mathematics",
+      "ip": "internal",
+      "result": "OK",
+      "time": "24m ago",
+      "icon": "sync"
+    },
+    {
+      "id": "a3",
+      "action": "Unauthorized Access Attempt Blocked",
+      "user": "Unknown",
+      "target": "Lalitpur Node Router",
+      "ip": "unknown",
+      "result": "BLOCKED",
+      "time": "1h ago",
+      "icon": "gpp_bad"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>School Admin Dashboard - SHIKSHYA AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/static/css/styles.css"/>
+<style>body{font-family:'Plus Jakarta Sans',sans-serif;}</style>
+</head>
+<body class="bg-[#f8f9ff] text-[#0b1c30] min-h-screen pb-24">
+
+<header class="w-full bg-white border-b border-[#c6c6cd] px-4 md:px-8 flex justify-between items-center h-16 sticky top-0 z-40 shadow-sm">
+  <div class="flex items-center gap-2">
+    <span class="material-symbols-outlined text-[#0051d5] text-2xl">auto_awesome</span>
+    <span class="font-bold text-lg text-black">SHIKSHYA AI</span>
+  </div>
+  <button id="logoutBtn" class="flex items-center gap-2 hover:opacity-80" title="Logout">
+    <span class="material-symbols-outlined text-[#0051d5]">account_circle</span>
+    <span class="text-sm hidden sm:inline">Logout</span>
+  </button>
+</header>
+
+<main class="w-full max-w-6xl mx-auto px-4 md:px-8 py-6 flex flex-col gap-5">
+
+  <div class="bg-white border border-[#c6c6cd] rounded-xl p-5 shadow-sm">
+    <div class="flex items-start justify-between flex-wrap gap-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#0051d5]">verified_user</span>
+          <h2 class="font-bold text-xl" id="adminName">Principal KMHSS</h2>
+        </div>
+        <p class="text-sm text-[#45464d]">School Administrator</p>
+      </div>
+      <span class="px-2 py-0.5 rounded-md bg-[#dbe1ff] text-[#00174b] text-xs font-semibold">KTM-0842</span>
+    </div>
+    <div class="pt-3 mt-3 border-t border-[#c6c6cd] flex items-center justify-between text-sm text-[#45464d] flex-wrap gap-2">
+      <span class="flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-base">apartment</span> Kathmandu Model Higher Sec School
+      </span>
+      <span class="text-xs font-mono">Nepal MoEST Node</span>
+    </div>
+  </div>
+
+  <div>
+    <h1 class="text-2xl font-bold">Institutional Management Console</h1>
+    <p class="text-sm text-[#45464d]">School operations, faculty &amp; student enrolment</p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="bg-white border border-[#c6c6cd] rounded-xl p-4">
+      <div class="flex items-center justify-between text-[#45464d] mb-1">
+        <span class="text-xs font-semibold">Total Students</span>
+        <span class="material-symbols-outlined text-base">groups</span>
+      </div>
+      <div class="text-3xl font-bold font-mono">540</div>
+      <p class="text-xs text-[#45464d] mt-1">Across 4 classes</p>
+    </div>
+    <div class="bg-white border border-[#c6c6cd] rounded-xl p-4">
+      <div class="flex items-center justify-between text-[#45464d] mb-1">
+        <span class="text-xs font-semibold">Faculty</span>
+        <span class="material-symbols-outlined text-base">school</span>
+      </div>
+      <div class="text-3xl font-bold font-mono">28</div>
+      <p class="text-xs text-[#45464d] mt-1">12 STEM · 16 Non-STEM</p>
+    </div>
+    <div class="bg-white border border-[#c6c6cd] rounded-xl p-4">
+      <div class="flex items-center justify-between text-[#45464d] mb-1">
+        <span class="text-xs font-semibold">AI Usage</span>
+        <span class="material-symbols-outlined text-base text-[#0051d5]">psychology</span>
+      </div>
+      <div class="text-3xl font-bold font-mono text-[#0051d5]">98%</div>
+      <p class="text-xs text-[#45464d] mt-1">Enabled for all classes</p>
+    </div>
+    <div class="bg-white border border-[#c6c6cd] rounded-xl p-4">
+      <div class="flex items-center justify-between text-[#45464d] mb-1">
+        <span class="text-xs font-semibold">License</span>
+        <span class="material-symbols-outlined text-base text-[#009668]">verified</span>
+      </div>
+      <div class="text-3xl font-bold font-mono text-[#009668]">Active</div>
+      <p class="text-xs text-[#45464d] mt-1">Expires 2082-12-31</p>
+    </div>
+  </div>
+
+  <div class="bg-white border border-[#c6c6cd] rounded-xl p-5">
+    <h3 class="font-bold text-lg mb-3">Quick Actions</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+      <button class="h-11 bg-black text-white rounded-lg text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-[#1e293b]">
+        <span class="material-symbols-outlined text-base">person_add</span> Enroll Student
+      </button>
+      <button class="h-11 border border-[#c6c6cd] rounded-lg text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-[#eff4ff]">
+        <span class="material-symbols-outlined text-base">group_add</span> Add Faculty
+      </button>
+      <button class="h-11 border border-[#c6c6cd] rounded-lg text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-[#eff4ff]">
+        <span class="material-symbols-outlined text-base">bar_chart</span> Reports
+      </button>
+      <button class="h-11 border border-[#c6c6cd] rounded-lg text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-[#eff4ff]">
+        <span class="material-symbols-outlined text-base">tune</span> Settings
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-white border-t border-[#c6c6cd] shadow-lg md:hidden">
+  <a class="flex flex-col items-center justify-center bg-[#316bf3] text-white rounded-xl px-3 py-1.5" href="/school-admin">
+    <span class="material-symbols-outlined text-xl">dashboard</span>
+    <span class="text-[11px] font-semibold mt-0.5">Dashboard</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-[#45464d] px-3 py-1.5" href="#">
+    <span class="material-symbols-outlined text-xl">school</span>
+    <span class="text-[11px] font-semibold mt-0.5">Faculty</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-[#45464d] px-3 py-1.5" href="#">
+    <span class="material-symbols-outlined text-xl">face</span>
+    <span class="text-[11px] font-semibold mt-0.5">Students</span>
+  </a>
+  <button id="mobileLogout" class="flex flex-col items-center justify-center text-[#45464d] px-3 py-1.5">
+    <span class="material-symbols-outlined text-xl">logout</span>
+    <span class="text-[11px] font-semibold mt-0.5">Logout</span>
+  </button>
+</nav>
+
+<script src="/static/js/api.js"></script>
+<script src="/static/js/school-admin.js"></script>
+</body></html>
