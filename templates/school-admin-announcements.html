@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Announcements — Shikshya AI</title>
+<link rel="icon" type="image/svg+xml" href="/static/img/logo.svg"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/static/css/styles.css"/>
+<style>body{font-family:'Plus Jakarta Sans',sans-serif;}</style>
+</head>
+<body class="bg-[#f8f9ff] text-[#0b1c30] min-h-screen">
+<div id="layout-root"></div>
+
+<script src="/static/js/api.js"></script>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/layout.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  let me;
+  try { me = await window.API.getMyProfile(); }
+  catch (_) { window.location.href = '/auth'; return; }
+
+  const role = me.role === 'superadmin' ? 'superadmin'
+             : me.role === 'schooladmin' ? 'schooladmin'
+             : me.role === 'teacher' ? 'teacher' : 'student';
+  const subMap = { schooladmin:'School Admin', teacher:'Teacher', student:'Student', superadmin:'Super Admin' };
+  const avatar = (me.name||'U').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+  let schoolName = '', schoolAddr = '';
+  if (me.schoolId) {
+    try { const s = await window.API.getSchool(me.schoolId); schoolName = s.name; schoolAddr = s.province; } catch(_){}
+  }
+
+  window.renderLayout({
+    role, active:'announcements',
+    userName: me.name, userSub: subMap[role] || 'User', userAvatar: avatar,
+    schoolName, schoolAddr
+  });
+
+  const content = window.getPageContent();
+  content.innerHTML = `
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div>
+        <h1 class="text-2xl font-extrabold tracking-tight">Announcements</h1>
+        <p class="text-sm text-[#45464d] mt-0.5">School-wide notices &amp; updates</p>
+      </div>
+      <button class="flex items-center gap-1.5 bg-black text-white font-semibold text-sm h-10 px-4 rounded-lg hover:bg-[#1e293b]">
+        <span class="material-symbols-outlined text-base">campaign</span> New Announcement
+      </button>
+    </div>
+    <div id="announcementsList" class="space-y-3">
+      <p class="text-sm text-[#45464d]">Loading announcements…</p>
+    </div>`;
+
+  try {
+    const { announcements } = await window.API.getAnnouncements();
+    const el = document.getElementById('announcementsList');
+
+    const fallback = [
+      { id:'AN-1', title:'Parent-Teacher Meeting', body:'Scheduled for October 15. All parents are invited.', time:'2 days ago', author:'Principal', icon:'event', color:'bg-[#eff6ff] text-[#1d4ed8]' },
+      { id:'AN-2', title:'Mid-term Exams Begin', body:'Mid-term exams begin November 1. Timetable posted on notice board.', time:'5 days ago', author:'Admin Office', icon:'assignment', color:'bg-[#fef3c7] text-[#92400e]' },
+      { id:'AN-3', title:'Sports Week Announced', body:'Annual sports week from December 5–10.', time:'1 week ago', author:'Sports Dept', icon:'sports_soccer', color:'bg-[#dcfce7] text-[#16a34a]' },
+    ];
+    const list = (announcements && announcements.length) ? announcements : fallback;
+
+    el.innerHTML = list.map(a => `
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg ${a.color || 'bg-[#eff6ff] text-[#1d4ed8]'} flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined">${a.icon || 'campaign'}</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="font-bold text-sm">${escHtml(a.title)}</p>
+          <p class="text-sm text-[#45464d] mt-0.5">${escHtml(a.body)}</p>
+          <p class="text-[11px] text-[#76777d] mt-1 font-mono">${escHtml(a.author || 'Admin')} · ${escHtml(a.time || 'just now')}</p>
+        </div>
+      </div>`).join('');
+  } catch (_) {}
+});
+
+function escHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+</script>
+</body></html>

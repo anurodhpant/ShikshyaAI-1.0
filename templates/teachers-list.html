@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Teachers — Shikshya AI</title>
+<link rel="icon" type="image/svg+xml" href="/static/img/logo.svg"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/static/css/styles.css"/>
+<style>
+  body{font-family:'Plus Jakarta Sans',sans-serif;}
+  .teacher-card{transition:.15s;cursor:pointer;}
+  .teacher-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(29,78,216,.10);border-color:#1d4ed8;}
+</style>
+</head>
+<body class="bg-[#f8f9ff] text-[#0b1c30] min-h-screen">
+<div id="layout-root"></div>
+
+<script src="/static/js/api.js"></script>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/layout.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  let me;
+  try { me = await window.API.getMyProfile(); }
+  catch (_) { window.location.href = '/auth'; return; }
+
+  const role = me.role === 'superadmin' ? 'superadmin'
+             : me.role === 'schooladmin' ? 'schooladmin'
+             : me.role === 'teacher' ? 'teacher' : 'student';
+  const subMap = { schooladmin:'School Admin', teacher:'Teacher', student:'Student', superadmin:'Super Admin' };
+  const avatar = (me.name||'U').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+  let schoolName = '', schoolAddr = '';
+  if (me.schoolId) {
+    try { const s = await window.API.getSchool(me.schoolId); schoolName = s.name; schoolAddr = s.province; } catch(_){}
+  }
+
+  window.renderLayout({
+    role, active:'teachers',
+    userName: me.name, userSub: subMap[role] || 'User', userAvatar: avatar,
+    schoolName, schoolAddr
+  });
+
+  const content = window.getPageContent();
+  content.innerHTML = `
+    <div>
+      <h1 class="text-2xl font-extrabold tracking-tight">Teachers</h1>
+      <p class="text-sm text-[#45464d] mt-0.5">Faculty directory</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="teacherGrid">
+      <p class="col-span-full text-sm text-[#45464d]">Loading teachers…</p>
+    </div>`;
+
+  try {
+    const { teachers } = await window.API.getTeachers();
+    const grid = document.getElementById('teacherGrid');
+    if (!teachers || !teachers.length) {
+      grid.innerHTML = `<p class="col-span-full text-sm text-[#45464d]">No teachers found.</p>`;
+      return;
+    }
+    grid.innerHTML = teachers.map(t => `
+      <a href="/teacher-portal?teacherId=${encodeURIComponent(t.id)}" class="teacher-card bg-white border border-[#e2e8f0] rounded-xl p-4 flex flex-col">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-12 h-12 rounded-full bg-[#7c3aed] text-white flex items-center justify-center font-bold">
+            ${escHtml(t.avatar || (t.name || 'T').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase())}
+          </div>
+          <div class="min-w-0 flex-1">
+            <p class="font-bold text-sm truncate">${escHtml(t.name)}</p>
+            <p class="text-xs text-[#45464d]">${escHtml(t.subject)}</p>
+          </div>
+          <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#ecfdf5] text-[#009668] border border-[#a7f3d0]">
+            ${escHtml(t.status || 'Active')}
+          </span>
+        </div>
+        <div class="text-xs text-[#45464d] space-y-1 mb-3">
+          <p class="flex items-center gap-1.5 truncate"><span class="material-symbols-outlined text-sm">mail</span>${escHtml(t.email)}</p>
+          <p class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">call</span>${escHtml(t.phone || '—')}</p>
+          <p class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">class</span>Classes ${escHtml((t.classes||[]).join(', '))}</p>
+        </div>
+        <span class="mt-auto w-full py-2 rounded-lg bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-semibold flex items-center justify-center gap-1.5">
+          Open Teacher Portal <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </span>
+      </a>`).join('');
+  } catch (err) {
+    document.getElementById('teacherGrid').innerHTML = `<p class="col-span-full text-sm text-[#ba1a1a]">Error: ${escHtml(err.message)}</p>`;
+  }
+});
+
+function escHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+</script>
+</body></html>

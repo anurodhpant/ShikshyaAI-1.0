@@ -2,13 +2,14 @@
   "schools": [
     {
       "id": "KTM-0842",
-      "name": "Kathmandu Model Secondary School",
-      "province": "Bagmati",
+      "name": "Shree Himalaya Secondary School",
+      "province": "Kathmandu, Nepal",
       "classes": "6-12",
       "status": "active",
-      "students": 540,
-      "teachers": 28,
-      "aiEnabled": 98
+      "students": 682,
+      "teachers": 48,
+      "aiEnabled": 98,
+      "principal": "Anita Sharma"
     },
     {
       "id": "PKR-0119",
@@ -49,23 +50,24 @@
       "address": "CDC Sanothimi, Bhaktapur",
       "password": "admin123",
       "role": "superadmin",
-      "name": "Anurodh Pant"
+      "name": "Anurodh Pant",
+      "schoolId": ""
     },
     {
       "id": "u2",
       "email": "principal@kmhss.edu.np",
       "phone": "+977-9800000002",
-      "address": "Kathmandu Model Higher Sec School, Bagmati",
+      "address": "Kathmandu",
       "password": "admin123",
       "role": "schooladmin",
-      "name": "Principal KMHSS",
-      "schoolId": "KTM-0842"
+      "name": "Anita Sharma",
+      "schoolId": "BRT-0451"
     },
     {
       "id": "u3",
       "email": "t.subedi@kmhss.edu.np",
       "phone": "+977-9800000003",
-      "address": "Lalitpur, Bagmati",
+      "address": "CDC Sanothimi, Bhaktapur",
       "password": "teacher123",
       "role": "teacher",
       "name": "Sunita Rai",
@@ -75,7 +77,7 @@
       "id": "u4",
       "email": "student.aarav@kmhss.edu.np",
       "phone": "+977-9800000004",
-      "address": "Kathmandu, Bagmati",
+      "address": "Kathmandu",
       "password": "student123",
       "role": "student",
       "name": "Aarav Shrestha",
@@ -83,26 +85,333 @@
       "classLevel": "10"
     },
     {
-      "id": "u1790784320559",
+      "id": "u1790856904288",
       "email": "anurodhpant@gmail.com",
-      "phone": "9845675432",
-      "address": "Lalitpur",
-      "password": "aaaa0011",
-      "role": "student",
+      "phone": "+977-9865432345",
+      "address": "CDC Sanothimi, Bhaktapur",
+      "password": "admin123",
+      "role": "schooladmin",
       "name": "Anurodh Pant",
-      "schoolId": "LTP-0034",
-      "classLevel": "10"
+      "schoolId": "KTM-0842"
+    }
+  ],
+  "teachers": [
+    {
+      "id": "T-001",
+      "name": "Sunita Rai",
+      "subject": "Mathematics",
+      "email": "t.subedi@kmhss.edu.np",
+      "phone": "+977-9800000003",
+      "classes": [
+        "9",
+        "10"
+      ],
+      "schoolId": "KTM-0842",
+      "avatar": "SR",
+      "joined": "2021-04-12",
+      "status": "active",
+      "portalUser": "u3"
     },
     {
-      "id": "u1790784488637",
-      "email": "an@gmail.com",
-      "phone": "9845675433",
-      "address": "Lalitpur",
-      "password": "1234",
-      "role": "student",
-      "name": "Anurodh Pant",
-      "schoolId": "LTP-0034",
-      "classLevel": "6"
+      "id": "T-002",
+      "name": "Rajesh Kumar",
+      "subject": "Science",
+      "email": "r.kumar@kmhss.edu.np",
+      "phone": "+977-9800000010",
+      "classes": [
+        "9",
+        "10",
+        "11"
+      ],
+      "schoolId": "KTM-0842",
+      "avatar": "RK",
+      "joined": "2019-06-01",
+      "status": "active"
+    },
+    {
+      "id": "T-003",
+      "name": "Priya Thapa",
+      "subject": "English",
+      "email": "p.thapa@kmhss.edu.np",
+      "phone": "+977-9800000011",
+      "classes": [
+        "8",
+        "9",
+        "10"
+      ],
+      "schoolId": "KTM-0842",
+      "avatar": "PT",
+      "joined": "2020-02-15",
+      "status": "active"
+    },
+    {
+      "id": "T-004",
+      "name": "Bikash Adhikari",
+      "subject": "Nepali",
+      "email": "b.adhikari@kmhss.edu.np",
+      "phone": "+977-9800000012",
+      "classes": [
+        "6",
+        "7",
+        "8"
+      ],
+      "schoolId": "KTM-0842",
+      "avatar": "BA",
+      "joined": "2018-08-20",
+      "status": "active"
+    },
+    {
+      "id": "T-005",
+      "name": "Anjali Gurung",
+      "subject": "Social Studies",
+      "email": "a.gurung@kmhss.edu.np",
+      "phone": "+977-9800000013",
+      "classes": [
+        "9",
+        "10"
+      ],
+      "schoolId": "KTM-0842",
+      "avatar": "AG",
+      "joined": "2022-01-05",
+      "status": "active"
+    },
+    {
+      "id": "T-006",
+      "name": "Suresh Bhandari",
+      "subject": "Computer Science",
+      "email": "s.bhandari@kmhss.edu.np",
+      "phone": "+977-9800000014",
+      "classes": [
+        "9",
+        "10"
+      ],
+      "schoolId": "KTM-0842",
+      "avatar": "SB",
+      "joined": "2020-09-11",
+      "status": "active"
+    }
+  ],
+  "students": [
+    {
+      "id": "S-101",
+      "name": "Aarav Shrestha",
+      "classLevel": "10",
+      "section": "A",
+      "roll": 14,
+      "email": "student.aarav@kmhss.edu.np",
+      "phone": "+977-9800000004",
+      "schoolId": "KTM-0842",
+      "gpa": 3.65,
+      "avatar": "AS",
+      "status": "active",
+      "portalUser": "u4"
+    },
+    {
+      "id": "S-102",
+      "name": "Sujata Karki",
+      "classLevel": "10",
+      "section": "A",
+      "roll": 2,
+      "email": "s.karki@kmhss.edu.np",
+      "phone": "+977-9800000020",
+      "schoolId": "KTM-0842",
+      "gpa": 3.9,
+      "avatar": "SK",
+      "status": "active"
+    },
+    {
+      "id": "S-103",
+      "name": "Sujal Shrestha",
+      "classLevel": "9",
+      "section": "B",
+      "roll": 7,
+      "email": "s.shrestha@kmhss.edu.np",
+      "phone": "+977-9800000021",
+      "schoolId": "KTM-0842",
+      "gpa": 3.4,
+      "avatar": "SS",
+      "status": "active"
+    },
+    {
+      "id": "S-104",
+      "name": "Ramesh Thapa",
+      "classLevel": "8",
+      "section": "A",
+      "roll": 12,
+      "email": "r.thapa@kmhss.edu.np",
+      "phone": "+977-9800000022",
+      "schoolId": "KTM-0842",
+      "gpa": 3.2,
+      "avatar": "RT",
+      "status": "active"
+    },
+    {
+      "id": "S-105",
+      "name": "Nisha Lama",
+      "classLevel": "7",
+      "section": "A",
+      "roll": 5,
+      "email": "n.lama@kmhss.edu.np",
+      "phone": "+977-9800000023",
+      "schoolId": "KTM-0842",
+      "gpa": 3.7,
+      "avatar": "NL",
+      "status": "active"
+    },
+    {
+      "id": "S-106",
+      "name": "Prakash Rai",
+      "classLevel": "6",
+      "section": "A",
+      "roll": 9,
+      "email": "p.rai@kmhss.edu.np",
+      "phone": "+977-9800000024",
+      "schoolId": "KTM-0842",
+      "gpa": 3.5,
+      "avatar": "PR",
+      "status": "active"
+    }
+  ],
+  "classes": [
+    {
+      "id": "6A",
+      "classLevel": "6",
+      "section": "A",
+      "students": 58,
+      "teacher": "Bikash Adhikari"
+    },
+    {
+      "id": "7A",
+      "classLevel": "7",
+      "section": "A",
+      "students": 72,
+      "teacher": "Bikash Adhikari"
+    },
+    {
+      "id": "8A",
+      "classLevel": "8",
+      "section": "A",
+      "students": 86,
+      "teacher": "Priya Thapa"
+    },
+    {
+      "id": "9B",
+      "classLevel": "9",
+      "section": "B",
+      "students": 94,
+      "teacher": "Sunita Rai"
+    },
+    {
+      "id": "10A",
+      "classLevel": "10",
+      "section": "A",
+      "students": 102,
+      "teacher": "Sunita Rai"
+    },
+    {
+      "id": "11A",
+      "classLevel": "11",
+      "section": "A",
+      "students": 98,
+      "teacher": "Rajesh Kumar"
+    },
+    {
+      "id": "12A",
+      "classLevel": "12",
+      "section": "A",
+      "students": 92,
+      "teacher": "Rajesh Kumar"
+    }
+  ],
+  "subjects": [
+    {
+      "id": "sub-math",
+      "name": "Mathematics",
+      "classLevels": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "performance": 82
+    },
+    {
+      "id": "sub-sci",
+      "name": "Science",
+      "classLevels": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "performance": 78
+    },
+    {
+      "id": "sub-eng",
+      "name": "English",
+      "classLevels": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "performance": 74
+    },
+    {
+      "id": "sub-nep",
+      "name": "Nepali",
+      "classLevels": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "performance": 71
+    },
+    {
+      "id": "sub-soc",
+      "name": "Social Studies",
+      "classLevels": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "performance": 77
+    },
+    {
+      "id": "sub-heal",
+      "name": "Health & Physical Education",
+      "classLevels": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "performance": 89
+    },
+    {
+      "id": "sub-comp",
+      "name": "Computer Science",
+      "classLevels": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "performance": 76
     }
   ],
   "curriculum": [
@@ -415,37 +724,143 @@
       "topic": "Vectors"
     }
   ],
-  "uploads": [
+  "assignments": [
     {
-      "id": "up1790784401596",
-      "title": "Math",
-      "filename": "0d771b35_grade-6-mathematics.pdf",
-      "originalName": "grade-6-mathematics.pdf",
-      "ext": "pdf",
-      "sizeKB": 22656.6,
+      "id": "A-01",
+      "title": "Algebra Practice",
       "subject": "Mathematics",
-      "classLevel": "6",
-      "uploadedBy": "Anurodh Pant",
-      "uploadedById": "u1790784320559",
-      "uploadedAt": "2026-09-30T16:06:41.598647Z",
-      "url": "/static/uploads/0d771b35_grade-6-mathematics.pdf"
-    }
-  ],
-  "auditLogs": [
-    {
-      "id": "a1790785152464",
-      "action": "Login successful",
-      "user": "Anurodh Pant",
-      "target": "role:student",
-      "ip": "127.0.0.1",
-      "result": "SUCCESS",
-      "time": "just now",
-      "icon": "key"
+      "classLevel": "9",
+      "section": "B",
+      "due": "Oct 1, 2025",
+      "status": "Pending",
+      "uploadedBy": "Sunita Rai",
+      "schoolId": "KTM-0842"
     },
     {
-      "id": "a1790784532778",
+      "id": "A-02",
+      "title": "Essay Writing",
+      "subject": "English",
+      "classLevel": "8",
+      "section": "A",
+      "due": "Oct 2, 2025",
+      "status": "Pending",
+      "uploadedBy": "Priya Thapa",
+      "schoolId": "KTM-0842"
+    },
+    {
+      "id": "A-03",
+      "title": "Science MCQ",
+      "subject": "Science",
+      "classLevel": "7",
+      "section": "A",
+      "due": "Oct 3, 2025",
+      "status": "Pending",
+      "uploadedBy": "Rajesh Kumar",
+      "schoolId": "KTM-0842"
+    },
+    {
+      "id": "A-04",
+      "title": "Nepali Grammar",
+      "subject": "Nepali",
+      "classLevel": "6",
+      "section": "A",
+      "due": "Oct 4, 2025",
+      "status": "Completed",
+      "uploadedBy": "Bikash Adhikari",
+      "schoolId": "KTM-0842"
+    },
+    {
+      "id": "A-05",
+      "title": "Chapter Test",
+      "subject": "Mathematics",
+      "classLevel": "10",
+      "section": "A",
+      "due": "Oct 5, 2025",
+      "status": "Pending",
+      "uploadedBy": "Sunita Rai",
+      "schoolId": "KTM-0842"
+    }
+  ],
+  "activity": [
+    {
+      "id": "act-1",
+      "type": "student_added",
+      "text": "New student added: Ramesh Thapa (Class 8)",
+      "time": "2 hours ago",
+      "icon": "person_add",
+      "color": "text-[#0051d5]"
+    },
+    {
+      "id": "act-2",
+      "type": "teacher_added",
+      "text": "Teacher added: Sujata Karki (Mathematics)",
+      "time": "4 hours ago",
+      "icon": "group_add",
+      "color": "text-[#7c3aed]"
+    },
+    {
+      "id": "act-3",
+      "type": "assignment",
+      "text": "Assignment created: Algebra Practice (Class 9)",
+      "time": "6 hours ago",
+      "icon": "assignment_add",
+      "color": "text-[#ea580c]"
+    },
+    {
+      "id": "act-4",
+      "type": "ai_practice",
+      "text": "Student completed AI practice: Sujal Shrestha (Class 7)",
+      "time": "8 hours ago",
+      "icon": "smart_toy",
+      "color": "text-[#0891b2]"
+    },
+    {
+      "id": "act-5",
+      "type": "syllabus",
+      "text": "Syllabus updated: Mathematics (Class 10)",
+      "time": "1 day ago",
+      "icon": "menu_book",
+      "color": "text-[#16a34a]"
+    }
+  ],
+  "announcements": [
+    {
+      "id": "AN-1",
+      "title": "Parent-Teacher Meeting",
+      "body": "Scheduled for October 15. All parents are invited to attend the PTM in the main hall at 9 AM.",
+      "time": "2 days ago",
+      "author": "Principal",
+      "icon": "event",
+      "color": "bg-[#eff6ff] text-[#1d4ed8]",
+      "schoolId": "KTM-0842"
+    },
+    {
+      "id": "AN-2",
+      "title": "Mid-term Exams Begin",
+      "body": "Mid-term exams begin November 1. Timetable has been posted on the notice board and shared with class teachers.",
+      "time": "5 days ago",
+      "author": "Admin Office",
+      "icon": "assignment",
+      "color": "bg-[#fef3c7] text-[#92400e]",
+      "schoolId": "KTM-0842"
+    },
+    {
+      "id": "AN-3",
+      "title": "Sports Week Announced",
+      "body": "Annual sports week from December 5–10. Registration open for all classes.",
+      "time": "1 week ago",
+      "author": "Sports Dept",
+      "icon": "sports_soccer",
+      "color": "bg-[#dcfce7] text-[#16a34a]",
+      "schoolId": "KTM-0842"
+    }
+  ],
+  "uploads": [],
+  "auditLogs": [
+    {
+      "id": "a1790857310421",
       "action": "Login successful",
-      "user": "Anurodh Pant",
+      "user": "Sunita Rai",
       "target": "role:teacher",
       "ip": "192.168.1.72",
       "result": "SUCCESS",
@@ -453,594 +868,34 @@
       "icon": "key"
     },
     {
-      "id": "a1790784526899",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784526263",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784525318",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784488673",
-      "action": "User Registered",
+      "id": "a1790856904342",
+      "action": "Registered on login",
       "user": "Anurodh Pant",
-      "target": "role:student · an@gmail.com",
+      "target": "role:schooladmin · anurodhpant@gmail.com",
       "ip": "192.168.1.72",
       "result": "SUCCESS",
       "time": "just now",
       "icon": "person_add"
     },
     {
-      "id": "a1790784443187",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784401637",
-      "action": "Study Material Uploaded",
-      "user": "Anurodh Pant",
-      "target": "6 · Mathematics · grade-6-mathematics.pdf",
-      "ip": "192.168.1.72",
-      "result": "SUCCESS",
-      "time": "just now",
-      "icon": "upload_file"
-    },
-    {
-      "id": "a1790784320629",
-      "action": "User Registered",
-      "user": "Anurodh Pant",
-      "target": "role:teacher · anurodhpant@gmail.com",
-      "ip": "192.168.1.72",
-      "result": "SUCCESS",
-      "time": "just now",
-      "icon": "person_add"
-    },
-    {
-      "id": "a1790784124898",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784124698",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784124454",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784123993",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784121016",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784120870",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784120707",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784120482",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784119868",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784119697",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784119497",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784119287",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784119090",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784118899",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790784116891",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "192.168.1.72",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783824214",
+      "id": "a1790853490551",
       "action": "Login successful",
-      "user": "Aarav Shrestha",
-      "target": "role:student",
+      "user": "Anita Sharma",
+      "target": "role:schooladmin",
       "ip": "192.168.1.72",
       "result": "SUCCESS",
       "time": "just now",
       "icon": "key"
     },
     {
-      "id": "a1790783780277",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
+      "id": "a1790852707199",
+      "action": "Login successful",
+      "user": "Anita Sharma",
+      "target": "role:schooladmin",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
       "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783779624",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783779274",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783778972",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783778791",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783778451",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783778221",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783778080",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783777895",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783777012",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783776011",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783774378",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783629415",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783629011",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783627505",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783627265",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783626726",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783626474",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783626048",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783625483",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783625253",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783625022",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783624815",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783624600",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783624376",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783623809",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783616693",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783616212",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783612929",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783612655",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783612389",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783612178",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783611344",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783595870",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783594126",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
-    },
-    {
-      "id": "a1790783592321",
-      "action": "Login failed",
-      "user": "anurodhpant@gmail.com",
-      "target": "auth",
-      "ip": "127.0.0.1",
-      "result": "FAILED",
-      "time": "just now",
-      "icon": "gpp_bad"
+      "icon": "key"
     },
     {
       "id": "a1",

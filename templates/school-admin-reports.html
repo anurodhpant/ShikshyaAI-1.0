@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reports &amp; Analytics — Shikshya AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/static/css/styles.css"/>
+<style>
+  body{font-family:'Plus Jakarta Sans',sans-serif;}
+  .class-pill.active{background:#1d4ed8!important;color:#fff!important;border-color:#1d4ed8!important;}
+  .student-card{transition:.15s;cursor:pointer;}
+  .student-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(29,78,216,.10);border-color:#1d4ed8;}
+</style>
+</head>
+<body class="bg-[#f8f9ff] text-[#0b1c30] min-h-screen">
+<div id="layout-root"></div>
+
+<script src="/static/js/api.js"></script>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/layout.js"></script>
+<script>
+let ALL_STUDENTS = [];
+let CURRENT_FILTER = 'all';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  let me;
+  try { me = await window.API.getMyProfile(); }
+  catch (_) { window.location.href = '/auth'; return; }
+
+  const role = me.role === 'superadmin' ? 'superadmin'
+             : me.role === 'schooladmin' ? 'schooladmin'
+             : me.role === 'teacher' ? 'teacher' : 'student';
+  const subMap = { schooladmin:'School Admin', teacher:'Teacher', student:'Student', superadmin:'Super Admin' };
+  const avatar = (me.name||'U').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+  let schoolName = '', schoolAddr = '';
+  if (me.schoolId) {
+    try { const s = await window.API.getSchool(me.schoolId); schoolName = s.name; schoolAddr = s.province; } catch(_){}
+  }
+
+  window.renderLayout({
+    role, active:'reports',
+    userName: me.name, userSub: subMap[role] || 'User', userAvatar: avatar,
+    schoolName, schoolAddr
+  });
+
+  const content = window.getPageContent();
+  content.innerHTML = `
+    <div>
+      <h1 class="text-2xl font-extrabold tracking-tight">Reports &amp; Analytics</h1>
+      <p class="text-sm text-[#45464d] mt-0.5">Click any student to open their detailed report</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+          <span class="material-symbols-outlined text-[#1d4ed8] bg-[#eff4ff] p-1.5 rounded-lg">groups</span>
+        </div>
+        <p class="text-xs text-[#45464d] font-semibold">Total Students</p>
+        <p class="text-2xl font-extrabold font-mono" id="statTotal">—</p>
+      </div>
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+          <span class="material-symbols-outlined text-[#16a34a] bg-[#dcfce7] p-1.5 rounded-lg">trending_up</span>
+        </div>
+        <p class="text-xs text-[#45464d] font-semibold">Average GPA</p>
+        <p class="text-2xl font-extrabold font-mono" id="statGpa">—</p>
+      </div>
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+          <span class="material-symbols-outlined text-[#d97706] bg-[#fef3c7] p-1.5 rounded-lg">emoji_events</span>
+        </div>
+        <p class="text-xs text-[#45464d] font-semibold">Top Performers</p>
+        <p class="text-2xl font-extrabold font-mono" id="statTop">—</p>
+      </div>
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+          <span class="material-symbols-outlined text-[#ba1a1a] bg-[#ffdad6] p-1.5 rounded-lg">warning</span>
+        </div>
+        <p class="text-xs text-[#45464d] font-semibold">Needs Attention</p>
+        <p class="text-2xl font-extrabold font-mono text-[#ba1a1a]" id="statLow">—</p>
+      </div>
+    </div>
+
+    <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#1d4ed8]">insights</span>
+          <h2 class="font-bold">Subject-wise Performance (School Average)</h2>
+        </div>
+      </div>
+      <div id="subjectPerf" class="space-y-3"></div>
+    </div>
+
+    <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+      <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#1d4ed8]">person_search</span>
+          <h2 class="font-bold">Individual Student Reports</h2>
+        </div>
+        <div class="flex flex-wrap gap-2" id="classChips"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="studentGrid">
+        <p class="col-span-full text-sm text-[#45464d]">Loading students…</p>
+      </div>
+    </div>
+  `;
+
+  await Promise.all([loadStats(), loadSubjectPerformance(), loadStudents()]);
+});
+
+async function loadStats() {
+  try {
+    const { students } = await window.API.getStudents();
+    const list = students || [];
+    document.getElementById('statTotal').textContent = list.length;
+
+    const gpas = list.map(s => s.gpa).filter(Boolean);
+    const avg = gpas.length ? (gpas.reduce((a,b)=>a+b,0) / gpas.length).toFixed(2) : '—';
+    document.getElementById('statGpa').textContent = avg;
+
+    const top = list.filter(s => (s.gpa || 0) >= 3.6).length;
+    const low = list.filter(s => (s.gpa || 0) > 0 && (s.gpa || 0) < 3.3).length;
+    document.getElementById('statTop').textContent = top || 0;
+    document.getElementById('statLow').textContent = low || 0;
+  } catch (_) {}
+}
+
+async function loadSubjectPerformance() {
+  try {
+    const { subjects } = await window.API.getSubjects();
+    const el = document.getElementById('subjectPerf');
+    if (!subjects || !subjects.length) {
+      el.innerHTML = `<p class="text-sm text-[#45464d]">No subject data available.</p>`;
+      return;
+    }
+    const colors = ['#1d4ed8', '#16a34a', '#d97706', '#dc2626', '#0891b2', '#7c3aed', '#ea580c'];
+    el.innerHTML = subjects.map((s, i) => `
+      <div class="flex items-center gap-2">
+        <span class="w-40 text-xs text-[#45464d] truncate">${escHtml(s.name)}</span>
+        <div class="flex-1 bg-[#e5eeff] rounded-full h-2.5 overflow-hidden">
+          <div class="h-2.5 rounded-full" style="width:${s.performance}%; background:${colors[i % colors.length]};"></div>
+        </div>
+        <span class="text-xs font-mono font-bold w-10 text-right">${s.performance}%</span>
+      </div>`).join('');
+  } catch (_) {}
+}
+
+async function loadStudents() {
+  try {
+    const { students } = await window.API.getStudents();
+    ALL_STUDENTS = students || [];
+    renderChips();
+    renderGrid();
+  } catch (err) {
+    document.getElementById('studentGrid').innerHTML =
+      `<p class="col-span-full text-sm text-[#ba1a1a]">Error: ${escHtml(err.message)}</p>`;
+  }
+}
+
+function renderChips() {
+  const classes = ['all', ...Array.from(new Set(ALL_STUDENTS.map(s => String(s.classLevel)))).sort()];
+  document.getElementById('classChips').innerHTML = classes.map(c => `
+    <button onclick="setFilter('${c}')" class="class-pill ${CURRENT_FILTER === c ? 'active' : ''} px-3 py-1.5 rounded-full text-xs font-semibold border bg-white text-[#45464d] border-[#e2e8f0] hover:bg-[#eff4ff]">
+      ${c === 'all' ? 'All Classes' : 'Class ' + c}
+    </button>`).join('');
+}
+
+function setFilter(c) { CURRENT_FILTER = c; renderChips(); renderGrid(); }
+
+function renderGrid() {
+  const el = document.getElementById('studentGrid');
+  const list = CURRENT_FILTER === 'all'
+    ? ALL_STUDENTS
+    : ALL_STUDENTS.filter(s => String(s.classLevel) === CURRENT_FILTER);
+
+  if (!list.length) {
+    el.innerHTML = `<p class="col-span-full text-sm text-[#45464d]">No students match this filter.</p>`;
+    return;
+  }
+  el.innerHTML = list.map(s => `
+    <a href="/student-report?studentId=${encodeURIComponent(s.id)}" class="student-card bg-white border border-[#e2e8f0] rounded-xl p-4 flex flex-col">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-12 h-12 rounded-full bg-[#1d4ed8] text-white flex items-center justify-center font-bold">
+          ${escHtml(s.avatar||'ST')}
+        </div>
+        <div class="min-w-0 flex-1">
+          <p class="font-bold text-sm truncate">${escHtml(s.name)}</p>
+          <p class="text-xs text-[#45464d]">Class ${escHtml(s.classLevel)} · Sec ${escHtml(s.section||'A')}</p>
+        </div>
+        <span class="px-1.5 py-0.5 rounded text-[10px] font-bold ${(s.gpa||0) >= 3.6 ? 'bg-[#ecfdf5] text-[#009668] border border-[#a7f3d0]' : (s.gpa||0) > 0 && (s.gpa||0) < 3.3 ? 'bg-[#ffdad6] text-[#ba1a1a] border border-[#fecaca]' : 'bg-[#eff6ff] text-[#1d4ed8] border border-[#dbeafe]'}">
+          ${s.gpa ? 'GPA ' + s.gpa : 'Active'}
+        </span>
+      </div>
+      <span class="mt-auto w-full py-2 rounded-lg bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-semibold flex items-center justify-center gap-1.5">
+        View Report <span class="material-symbols-outlined text-base">arrow_forward</span>
+      </span>
+    </a>`).join('');
+}
+
+function escHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+</script>
+</body></html>

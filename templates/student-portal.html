@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Portal — Shikshya AI</title>
+<link rel="icon" type="image/svg+xml" href="/static/img/logo.svg"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/static/css/styles.css"/>
+<style>body{font-family:'Plus Jakarta Sans',sans-serif;}</style>
+</head>
+<body class="bg-[#f8f9ff] text-[#0b1c30] min-h-screen">
+<div id="layout-root"></div>
+
+<script src="/static/js/api.js"></script>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/layout.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const params = new URLSearchParams(window.location.search);
+  const studentId = params.get('studentId');
+
+  let me;
+  try { me = await window.API.getMyProfile(); }
+  catch (_) { window.location.href = '/auth'; return; }
+
+  const role = me.role === 'superadmin' ? 'superadmin'
+             : me.role === 'schooladmin' ? 'schooladmin'
+             : me.role === 'teacher' ? 'teacher' : 'student';
+  const subMap = { schooladmin:'School Admin', teacher:'Teacher', student:'Student', superadmin:'Super Admin' };
+  const avatar = (me.name||'U').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+  let schoolName = '', schoolAddr = '';
+  if (me.schoolId) {
+    try { const s = await window.API.getSchool(me.schoolId); schoolName = s.name; schoolAddr = s.province; } catch(_){}
+  }
+
+  window.renderLayout({
+    role, active:'students',
+    userName: me.name, userSub: subMap[role] || 'User', userAvatar: avatar,
+    schoolName, schoolAddr
+  });
+
+  const content = window.getPageContent();
+
+  if (!studentId) {
+    content.innerHTML = `<p class="text-sm text-[#ba1a1a]">No student selected.</p>`;
+    return;
+  }
+
+  try {
+    const s = await window.API.getStudent(studentId);
+    const avatarS = s.avatar || 'ST';
+
+    let subjects = [];
+    try {
+      const { curriculum } = await window.API.getCurriculum(s.classLevel);
+      subjects = curriculum || [];
+    } catch(_){}
+
+    content.innerHTML = `
+      <a href="/students-list" class="inline-flex items-center gap-1 text-sm text-[#45464d] hover:text-[#1d4ed8]">
+        <span class="material-symbols-outlined text-base">arrow_back</span> Back to students
+      </a>
+
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+        <div class="flex items-start gap-4 flex-wrap">
+          <div class="w-16 h-16 rounded-full bg-[#16a34a] text-white flex items-center justify-center text-xl font-bold">${escHtml(avatarS)}</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <h1 class="text-2xl font-extrabold tracking-tight">${escHtml(s.name)}</h1>
+              <span class="px-2 py-0.5 rounded-md bg-[#eff6ff] text-[#1d4ed8] text-[11px] font-bold">Class ${escHtml(s.classLevel)} · Sec ${escHtml(s.section||'A')}</span>
+            </div>
+            <div class="text-xs text-[#45464d] mt-2 flex flex-wrap gap-x-4 gap-y-1">
+              <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">badge</span> Roll ${s.roll||'—'}</span>
+              <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">mail</span> ${escHtml(s.email)}</span>
+              <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">call</span> ${escHtml(s.phone || '—')}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+          <p class="text-xs font-semibold text-[#45464d]">Predicted GPA</p>
+          <p class="text-2xl font-extrabold font-mono">${s.gpa || '—'}</p>
+        </div>
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+          <p class="text-xs font-semibold text-[#45464d]">Subjects</p>
+          <p class="text-2xl font-extrabold font-mono">${subjects.length}</p>
+        </div>
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+          <p class="text-xs font-semibold text-[#45464d]">Enrolled Class</p>
+          <p class="text-2xl font-extrabold font-mono">${escHtml(s.classLevel)}</p>
+        </div>
+      </div>
+
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+        <h2 class="font-bold text-lg mb-3 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#1d4ed8]">menu_book</span>
+          Enrolled Subjects &amp; Progress
+        </h2>
+        ${subjects.length ? `
+          <div class="space-y-3">
+            ${subjects.map(item => `
+              <div class="flex items-center gap-3">
+                <span class="w-40 text-xs font-semibold truncate">${escHtml(item.subject)}</span>
+                <div class="flex-1 bg-[#e5eeff] rounded-full h-2">
+                  <div class="h-2 rounded-full bg-[#1d4ed8]" style="width:${item.prepared}%"></div>
+                </div>
+                <span class="text-xs font-mono font-bold w-10 text-right">${item.prepared}%</span>
+              </div>`).join('')}
+          </div>` : `<p class="text-sm text-[#45464d]">No subjects loaded.</p>`}
+      </div>
+    `;
+  } catch (err) {
+    content.innerHTML = `<p class="text-sm text-[#ba1a1a]">Error loading student: ${escHtml(err.message)}</p>`;
+  }
+});
+
+function escHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+</script>
+</body></html>

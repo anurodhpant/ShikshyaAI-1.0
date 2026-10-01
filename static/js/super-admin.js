@@ -1,16 +1,25 @@
 document.addEventListener('DOMContentLoaded', async () => {
+  document.getElementById('logoutBtn')?.addEventListener('click', doLogout);
+  document.getElementById('mobileLogout')?.addEventListener('click', doLogout);
+
   try {
-    const [schools, curriculum, audit] = await Promise.all([
-      window.API.getSchools(),
-      window.API.getCurriculum(),
-      window.API.getAuditLogs().catch(() => ({ logs: [], total: 0 }))
-    ]);
-    console.log('[SuperAdmin] Loaded:', {
-      schools: schools.total,
-      curriculum: curriculum.total,
-      logs: audit.total
-    });
+    const me = await window.API.getMyProfile();
+    if (me.role !== 'superadmin') {
+      window.location.href = '/auth';
+      return;
+    }
+    console.log('[SuperAdmin] Logged in as:', me.name);
   } catch (err) {
-    console.warn('[SuperAdmin] Could not load live data:', err.message);
+    console.warn('[SuperAdmin]', err.message);
+    window.location.href = '/auth';
+    return;
   }
+
+  // (existing dynamic loads for schools / audit are still inline in the template)
 });
+
+async function doLogout() {
+  try { await window.API.logout(); } catch (_) {}
+  try { localStorage.removeItem('shikshya_last_role'); } catch (_) {}
+  window.location.href = '/auth';
+}

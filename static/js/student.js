@@ -9,6 +9,7 @@ const GRADES = [
 ];
 
 let CURRENT_CLASS = "10";
+let IS_SUPERADMIN = false;
 
 document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('logoutBtn')?.addEventListener('click', doLogout);
@@ -16,7 +17,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     const me = await window.API.getMyProfile();
-    if (me.role !== 'student') { window.location.href = '/auth'; return; }
+    if (me.role !== 'student' && me.role !== 'superadmin') {
+      window.location.href = '/auth';
+      return;
+    }
+    IS_SUPERADMIN = me.role === 'superadmin';
+
     if (me.classLevel && GRADES.find(g => g.level === String(me.classLevel))) {
       CURRENT_CLASS = String(me.classLevel);
     }
@@ -31,6 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function doLogout() {
   try { await window.API.logout(); } catch (_) {}
+  try { localStorage.removeItem('shikshya_last_role'); } catch (_) {}
   window.location.href = '/auth';
 }
 

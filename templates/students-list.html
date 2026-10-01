@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Students — Shikshya AI</title>
+<link rel="icon" type="image/svg+xml" href="/static/img/logo.svg"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/static/css/styles.css"/>
+<style>
+  body{font-family:'Plus Jakarta Sans',sans-serif;}
+  .student-card{transition:.15s;cursor:pointer;}
+  .student-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(29,78,216,.10);border-color:#1d4ed8;}
+  .class-pill.active{background:#1d4ed8!important;color:#fff!important;border-color:#1d4ed8!important;}
+</style>
+</head>
+<body class="bg-[#f8f9ff] text-[#0b1c30] min-h-screen">
+<div id="layout-root"></div>
+
+<script src="/static/js/api.js"></script>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/layout.js"></script>
+<script>
+let ALL_STUDENTS = [];
+let CURRENT_FILTER = 'all';
+let ME = null;
+
+document.addEventListener('DOMContentLoaded', async () => {
+  try { ME = await window.API.getMyProfile(); }
+  catch (_) { window.location.href = '/auth'; return; }
+
+  const role = ME.role === 'superadmin' ? 'superadmin'
+             : ME.role === 'schooladmin' ? 'schooladmin'
+             : ME.role === 'teacher' ? 'teacher' : 'student';
+  const subMap = { schooladmin:'School Admin', teacher:'Teacher', student:'Student', superadmin:'Super Admin' };
+  const avatar = (ME.name||'U').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+  let schoolName = '', schoolAddr = '';
+  if (ME.schoolId) {
+    try { const s = await window.API.getSchool(ME.schoolId); schoolName = s.name; schoolAddr = s.province; } catch(_){}
+  }
+
+  window.renderLayout({
+    role, active:'students',
+    userName: ME.name, userSub: subMap[role] || 'User', userAvatar: avatar,
+    schoolName, schoolAddr
+  });
+
+  if (ME.role === 'student' && ME.classLevel) CURRENT_FILTER = String(ME.classLevel);
+
+  const content = window.getPageContent();
+  content.innerHTML = `
+    <div>
+      <h1 class="text-2xl font-extrabold tracking-tight">Students</h1>
+      <p class="text-sm text-[#45464d] mt-0.5" id="studentsSub">All enrolled students</p>
+    </div>
+    <div class="flex flex-wrap gap-2" id="classChips"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="studentGrid">
+      <p class="col-span-full text-sm text-[#45464d]">Loading students…</p>
+    </div>`;
+
+  try {
+    const { students } = await window.API.getStudents();
+    ALL_STUDENTS = students || [];
+    if (ME.role === 'student') {
+      document.getElementById('studentsSub').textContent = `Your Class ${ME.classLevel || ''} classmates`;
+    }
+    renderChips();
+    renderGrid();
+  } catch (err) {
+    document.getElementById('studentGrid').innerHTML = `<p class="col-span-full text-sm text-[#ba1a1a]">Error: ${escHtml(err.message)}</p>`;
+  }
+});
+
+function renderChips() {
+  const classes = ['all', ...Array.from(new Set(ALL_STUDENTS.map(s => String(s.classLevel)))).sort()];
+  document.getElementById('classChips').innerHTML = classes.map(c => `
+    <button onclick="setFilter('${c}')" class="class-pill ${CURRENT_FILTER === c ? 'active' : ''} px-3 py-1.5 rounded-full text-xs font-semibold border bg-white text-[#45464d] border-[#e2e8f0] hover:bg-[#eff4ff]">
+      ${c === 'all' ? 'All Classes' : 'Class ' + c}
+    </button>`).join('');
+}
+
+function setFilter(c) { CURRENT_FILTER = c; renderChips(); renderGrid(); }
+
+function renderGrid() {
+  const el = document.getElementById('studentGrid');
+  const list = CURRENT_FILTER === 'all'
+    ? ALL_STUDENTS
+    : ALL_STUDENTS.filter(s => String(s.classLevel) === CURRENT_FILTER);
+
+  if (!list.length) {
+    el.innerHTML = `<p class="col-span-full text-sm text-[#45464d]">No students match this filter.</p>`;
+    return;
+  }
+  el.innerHTML = list.map(s => `
+    <a href="/student-portal?studentId=${encodeURIComponent(s.id)}" class="student-card bg-white border border-[#e2e8f0] rounded-xl p-4 flex flex-col">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-12 h-12 rounded-full bg-[#16a34a] text-white flex items-center justify-center font-bold">
+          ${escHtml(s.avatar || 'ST')}
+        </div>
+        <div class="min-w-0 flex-1">
+          <p class="font-bold text-sm truncate">${escHtml(s.name)}</p>
+          <p class="text-xs text-[#45464d]">Class ${escHtml(s.classLevel)} · Sec ${escHtml(s.section||'A')} · Roll ${s.roll||'—'}</p>
+        </div>
+        <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#ecfdf5] text-[#009668] border border-[#a7f3d0]">
+          ${s.gpa ? 'GPA ' + s.gpa : 'Active'}
+        </span>
+      </div>
+      <div class="text-xs text-[#45464d] space-y-1 mb-3">
+        <p class="flex items-center gap-1.5 truncate"><span class="material-symbols-outlined text-sm">mail</span>${escHtml(s.email)}</p>
+        <p class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">call</span>${escHtml(s.phone || '—')}</p>
+      </div>
+      <span class="mt-auto w-full py-2 rounded-lg bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-semibold flex items-center justify-center gap-1.5">
+        Open Student Portal <span class="material-symbols-outlined text-base">arrow_forward</span>
+      </span>
+    </a>`).join('');
+}
+
+function escHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+</script>
+</body></html>

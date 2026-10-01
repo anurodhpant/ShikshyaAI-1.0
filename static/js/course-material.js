@@ -1,4 +1,3 @@
-// ---------- Read URL query params ----------
 function getQuery() {
   const p = new URLSearchParams(window.location.search);
   return {
@@ -13,15 +12,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('logoutBtn')?.addEventListener('click', doLogout);
   document.getElementById('mobileLogout')?.addEventListener('click', doLogout);
 
-  // Verify auth + set back link by role
   let me;
   try {
     me = await window.API.getMyProfile();
+    // Everyone with a session can view course material (incl. Super Admin)
+    if (!['student', 'teacher', 'schooladmin', 'superadmin'].includes(me.role)) {
+      window.location.href = '/auth';
+      return;
+    }
   } catch (_) {
     window.location.href = '/auth';
     return;
   }
 
+  // Set back link based on role
   const backMap = {
     student: '/student',
     teacher: '/teacher',
@@ -29,12 +33,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     superadmin: '/super-admin'
   };
   const backUrl = backMap[me.role] || '/student';
-
-  const backHome = document.getElementById('backHome');
-  if (backHome) backHome.href = backUrl;
-
-  const backLink = document.getElementById('backLink');
-  if (backLink) backLink.href = backUrl;
+  document.getElementById('backHome').href = backUrl;
+  document.getElementById('backLink').href = backUrl;
 
   // Render header
   const title = document.getElementById('pageTitle');
@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     sub.textContent = 'Every file uploaded by teachers';
   }
 
-  // Icon color
   const color = colorForSubject(Q_SUBJECT);
   const wrap = document.getElementById('subjectIconWrap');
   const icon = document.getElementById('subjectIcon');
@@ -97,7 +96,7 @@ async function loadFiles() {
 
 function renderFileCard(u) {
   const isPdf = (u.ext || '').toLowerCase() === 'pdf';
-  const isImage = ['png','jpg','jpeg'].includes((u.ext || '').toLowerCase());
+  const isImage = ['png', 'jpg', 'jpeg'].includes((u.ext || '').toLowerCase());
   const canOpenInline = isPdf || isImage;
 
   return `

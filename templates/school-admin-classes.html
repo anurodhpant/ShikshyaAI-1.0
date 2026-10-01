@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Classes &amp; Sections — Shikshya AI</title>
+<link rel="icon" type="image/svg+xml" href="/static/img/logo.svg"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/static/css/styles.css"/>
+<style>
+  body{font-family:'Plus Jakarta Sans',sans-serif;}
+  .class-card{transition:.15s;}
+  .class-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(29,78,216,.10);border-color:#1d4ed8;}
+</style>
+</head>
+<body class="bg-[#f8f9ff] text-[#0b1c30] min-h-screen">
+<div id="layout-root"></div>
+
+<script src="/static/js/api.js"></script>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/layout.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  let me;
+  try { me = await window.API.getMyProfile(); }
+  catch (_) { window.location.href = '/auth'; return; }
+
+  const role = me.role === 'superadmin' ? 'superadmin'
+             : me.role === 'schooladmin' ? 'schooladmin'
+             : me.role === 'teacher' ? 'teacher' : 'student';
+  const subMap = { schooladmin:'School Admin', teacher:'Teacher', student:'Student', superadmin:'Super Admin' };
+  const avatar = (me.name||'U').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+  let schoolName = '', schoolAddr = '';
+  if (me.schoolId) {
+    try { const s = await window.API.getSchool(me.schoolId); schoolName = s.name; schoolAddr = s.province; } catch(_){}
+  }
+
+  window.renderLayout({
+    role, active:'classes',
+    userName: me.name, userSub: subMap[role] || 'User', userAvatar: avatar,
+    schoolName, schoolAddr
+  });
+
+  const content = window.getPageContent();
+  content.innerHTML = `
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div>
+        <h1 class="text-2xl font-extrabold tracking-tight">Classes &amp; Sections</h1>
+        <p class="text-sm text-[#45464d] mt-0.5">All running classes at your school</p>
+      </div>
+      <button class="flex items-center gap-1.5 bg-black text-white font-semibold text-sm h-10 px-4 rounded-lg hover:bg-[#1e293b]">
+        <span class="material-symbols-outlined text-base">add</span> Add Class
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+        <p class="text-xs font-semibold text-[#45464d]">Total Classes</p>
+        <p class="text-3xl font-extrabold font-mono" id="statClasses">—</p>
+      </div>
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+        <p class="text-xs font-semibold text-[#45464d]">Total Sections</p>
+        <p class="text-3xl font-extrabold font-mono" id="statSections">—</p>
+      </div>
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+        <p class="text-xs font-semibold text-[#45464d]">Total Students</p>
+        <p class="text-3xl font-extrabold font-mono" id="statStudents">—</p>
+      </div>
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+        <p class="text-xs font-semibold text-[#45464d]">Avg Class Size</p>
+        <p class="text-3xl font-extrabold font-mono" id="statAvg">—</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="classesGrid">
+      <p class="col-span-full text-sm text-[#45464d]">Loading classes…</p>
+    </div>`;
+
+  try {
+    const { classes } = await window.API.getClasses();
+    const list = classes || [];
+    const grid = document.getElementById('classesGrid');
+
+    // Stats
+    const totalStudents = list.reduce((sum, c) => sum + (c.students || 0), 0);
+    document.getElementById('statClasses').textContent = list.length;
+    document.getElementById('statSections').textContent = list.length;
+    document.getElementById('statStudents').textContent = totalStudents;
+    document.getElementById('statAvg').textContent =
+      list.length ? Math.round(totalStudents / list.length) : 0;
+
+    if (!list.length) {
+      grid.innerHTML = `<p class="col-span-full text-sm text-[#45464d]">No classes configured yet.</p>`;
+      return;
+    }
+
+    const colors = [
+      { bg:'bg-[#eff6ff]', fg:'text-[#1d4ed8]' },
+      { bg:'bg-[#dcfce7]', fg:'text-[#16a34a]' },
+      { bg:'bg-[#fef3c7]', fg:'text-[#d97706]' },
+      { bg:'bg-[#ede9fe]', fg:'text-[#7c3aed]' },
+      { bg:'bg-[#cffafe]', fg:'text-[#0891b2]' },
+      { bg:'bg-[#fee2e2]', fg:'text-[#dc2626]' }
+    ];
+
+    grid.innerHTML = list.map((c, i) => {
+      const col = colors[i % colors.length];
+      return `
+        <div class="class-card bg-white border border-[#e2e8f0] rounded-xl p-4 flex flex-col">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-12 h-12 rounded-lg ${col.bg} ${col.fg} flex items-center justify-center">
+              <span class="material-symbols-outlined text-2xl">class</span>
+            </div>
+            <span class="px-2 py-0.5 rounded-md bg-[#eff6ff] text-[#1d4ed8] text-[10px] font-bold">
+              Sec ${escHtml(c.section)}
+            </span>
+          </div>
+
+          <h3 class="font-bold text-lg">Class ${escHtml(c.classLevel)}</h3>
+          <p class="text-xs text-[#45464d] mt-0.5">Section ${escHtml(c.section)} · ID ${escHtml(c.id)}</p>
+
+          <div class="mt-3 space-y-1.5 text-xs text-[#45464d]">
+            <p class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-sm">groups</span>
+              <span class="font-mono font-bold">${c.students || 0}</span> students
+            </p>
+            <p class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-sm">badge</span>
+              Class Teacher: ${escHtml(c.teacher || '—')}
+            </p>
+          </div>
+
+          <div class="mt-4 flex items-center gap-2">
+            <a href="/students-list?class=${encodeURIComponent(c.classLevel)}"
+               class="flex-1 py-2 rounded-lg bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-semibold flex items-center justify-center gap-1.5">
+              View Students
+            </a>
+            <button class="w-9 h-9 rounded-lg border border-[#e2e8f0] hover:bg-[#eff4ff] flex items-center justify-center text-[#45464d]">
+              <span class="material-symbols-outlined text-base">more_vert</span>
+            </button>
+          </div>
+        </div>`;
+    }).join('');
+  } catch (err) {
+    document.getElementById('classesGrid').innerHTML =
+      `<p class="col-span-full text-sm text-[#ba1a1a]">Error: ${escHtml(err.message)}</p>`;
+  }
+});
+
+function escHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+</script>
+</body></html>

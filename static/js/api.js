@@ -12,31 +12,49 @@ async function apiFetch(endpoint, options = {}) {
 }
 
 window.API = {
-  // Auth
+  // ---------- Auth ----------
   login:    (p) => apiFetch('/auth/login',    { method: 'POST', body: JSON.stringify(p) }),
   register: (p) => apiFetch('/auth/register', { method: 'POST', body: JSON.stringify(p) }),
   logout:   () => apiFetch('/auth/logout',    { method: 'POST' }),
   me:       () => apiFetch('/auth/me'),
 
-  // Schools
+  // ---------- Schools ----------
   getSchools: () => apiFetch('/schools'),
-  getSchool: (id) => apiFetch(`/schools/${id}`),
+  getSchool:  (id) => apiFetch(`/schools/${id}`),
   createSchool: (p) => apiFetch('/schools', { method: 'POST', body: JSON.stringify(p) }),
-  updateSchoolStatus: (id, status) => apiFetch(`/schools/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+  updateSchoolStatus: (id, status) => apiFetch(`/schools/${id}/status`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status })
+  }),
 
-  // Users
+  // ---------- Users ----------
   getUsers: () => apiFetch('/users'),
   getMyProfile: () => apiFetch('/users/me'),
 
-  // Curriculum
-  getCurriculum: (classLevel) => apiFetch('/curriculum' + (classLevel ? `?class=${classLevel}` : '')),
+  // ---------- Teachers ----------
+  getTeachers: () => apiFetch('/teachers'),
+  getTeacher:  (id) => apiFetch(`/teachers/${id}`),
+
+  // ---------- Students ----------
+  getStudents: (cls) => apiFetch('/students' + (cls ? `?class=${cls}` : '')),
+  getStudent:  (id) => apiFetch(`/students/${id}`),
+
+  // ---------- Classes / Subjects / Assignments / Activity ----------
+  getClasses:     () => apiFetch('/classes'),
+  getSubjects:    () => apiFetch('/subjects'),
+  getAssignments: () => apiFetch('/assignments'),
+  getActivity:    () => apiFetch('/activity'),
+
+  // ---------- Curriculum / Course Materials ----------
+  getCurriculum: (cls) => apiFetch('/curriculum' + (cls ? `?class=${cls}` : '')),
+  getCourseMaterials: (cls) => apiFetch('/course-materials' + (cls ? `?class=${cls}` : '')),
   approveCurriculum: (id) => apiFetch(`/curriculum/${id}/approve`, { method: 'POST' }),
 
-  // Uploads
-  getUploads: () => apiFetch('/uploads'),
+  // ---------- Uploads ----------
+  getUploads:   () => apiFetch('/uploads'),
   deleteUpload: (id) => apiFetch(`/uploads/${id}`, { method: 'DELETE' }),
 
-  // Audit + health
+  // ---------- Audit / Health ----------
   getAuditLogs: () => apiFetch('/audit'),
-  health: () => apiFetch('/health')
+  health:       () => apiFetch('/health')
 };

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Course Material — Shikshya AI</title>
+<link rel="icon" type="image/svg+xml" href="/static/img/logo.svg"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/static/css/styles.css"/>
+<style>
+  body{font-family:'Plus Jakarta Sans',sans-serif;}
+  .class-pill.active{background:#1d4ed8!important;color:#fff!important;border-color:#1d4ed8!important;}
+  .subject-card{transition:.15s;}
+  .subject-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(29,78,216,.10);border-color:#1d4ed8;}
+</style>
+</head>
+<body class="bg-[#f8f9ff] text-[#0b1c30] min-h-screen">
+<div id="layout-root"></div>
+
+<script src="/static/js/api.js"></script>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/layout.js"></script>
+<script>
+let CURRENT_CLASS = '10';
+let ME = null;
+let ALL_UPLOADS = [];
+
+document.addEventListener('DOMContentLoaded', async () => {
+  try { ME = await window.API.getMyProfile(); }
+  catch (_) { window.location.href = '/auth'; return; }
+
+  const role = ME.role === 'superadmin' ? 'superadmin'
+             : ME.role === 'schooladmin' ? 'schooladmin'
+             : ME.role === 'teacher' ? 'teacher' : 'student';
+  const subMap = { schooladmin:'School Admin', teacher:'Teacher', student:'Student', superadmin:'Super Admin' };
+  const avatar = (ME.name||'U').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+  let schoolName = '', schoolAddr = '';
+  if (ME.schoolId) {
+    try { const s = await window.API.getSchool(ME.schoolId); schoolName = s.name; schoolAddr = s.province; } catch(_){}
+  }
+
+  window.renderLayout({
+    role, active:'materials',
+    userName: ME.name, userSub: subMap[role] || 'User', userAvatar: avatar,
+    schoolName, schoolAddr
+  });
+
+  if (ME.role === 'student' && ME.classLevel) CURRENT_CLASS = String(ME.classLevel);
+
+  const content = window.getPageContent();
+  content.innerHTML = `
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div>
+        <h1 class="text-2xl font-extrabold tracking-tight">Course Material</h1>
+        <p class="text-sm text-[#45464d] mt-0.5">Browse curriculum &amp; materials uploaded by teachers</p>
+      </div>
+      <div class="text-xs bg-[#eff6ff] text-[#1d4ed8] font-semibold px-3 py-1.5 rounded-lg border border-[#dbeafe]">
+        CDC-aligned · Classes 6–12
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2" id="classChips"></div>
+
+    <div id="uploadsSection" class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#1d4ed8]">cloud_done</span>
+          <h2 class="font-bold text-lg">Uploaded by Teachers</h2>
+        </div>
+        <span id="uploadsCount" class="text-xs bg-[#e5eeff] text-[#0b1c30] px-2 py-0.5 rounded font-mono">—</span>
+      </div>
+      <div id="uploadsList" class="space-y-2">
+        <p class="text-sm text-[#45464d]">Loading uploaded materials…</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex items-center gap-2 mb-3">
+        <span class="material-symbols-outlined text-[#1d4ed8]">menu_book</span>
+        <h2 class="font-bold text-lg">Curriculum Subjects</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="subjectGrid">
+        <p class="col-span-full text-sm text-[#45464d]">Loading…</p>
+      </div>
+    </div>`;
+
+  renderChips();
+  await loadClass(CURRENT_CLASS);
+});
+
+function renderChips() {
+  const classes = ['6','7','8','9','10','11','12'];
+  document.getElementById('classChips').innerHTML = classes.map(c => `
+    <button onclick="loadClass('${c}')" class="class-pill ${c === CURRENT_CLASS ? 'active' : ''} px-3 py-1.5 rounded-full text-xs font-semibold border bg-white text-[#45464d] border-[#e2e8f0] hover:bg-[#eff4ff]">
+      Class ${c}
+    </button>`).join('');
+}
+
+async function loadClass(cls) {
+  CURRENT_CLASS = String(cls);
+  document.querySelectorAll('.class-pill').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === `Class ${cls}`);
+  });
+
+  const el = document.getElementById('subjectGrid');
+  el.innerHTML = `<p class="col-span-full text-sm text-[#45464d]">Loading Class ${cls} subjects…</p>`;
+
+  try {
+    const { curriculum, uploads } = await window.API.getCourseMaterials(cls);
+    ALL_UPLOADS = uploads || [];
+
+    const uploadsList = document.getElementById('uploadsList');
+    const uploadsCount = document.getElementById('uploadsCount');
+    const classUploads = (uploads || []).filter(u => String(u.classLevel) === String(cls));
+
+    uploadsCount.textContent = `${classUploads.length} file${classUploads.length === 1 ? '' : 's'}`;
+
+    if (!classUploads.length) {
+      uploadsList.innerHTML = `<p class="text-sm text-[#45464d]">No material uploaded yet for Class ${cls}. Teachers can upload from their dashboard.</p>`;
+    } else {
+      uploadsList.innerHTML = classUploads.map(u => `
+        <div class="flex items-center justify-between gap-3 p-3 rounded-lg border border-[#e2e8f0] hover:bg-[#f8fafc]">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-10 h-10 rounded-lg bg-[#eff4ff] text-[#1d4ed8] flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-xl">${iconForExt(u.ext)}</span>
+            </div>
+            <div class="min-w-0">
+              <p class="font-semibold text-sm truncate">${escHtml(u.title || u.originalName)}</p>
+              <p class="text-xs text-[#45464d] font-mono truncate">
+                ${escHtml(u.subject)} · Class ${escHtml(u.classLevel)} · ${u.sizeKB} KB · by ${escHtml(u.uploadedBy || 'Teacher')}
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="${u.url}" target="_blank" rel="noopener"
+               class="px-3 py-1.5 text-xs font-semibold border border-[#c6c6cd] hover:bg-[#eff4ff] rounded-md flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span> Open
+            </a>
+            <a href="${u.url}" download
+               class="px-3 py-1.5 text-xs font-semibold bg-[#1d4ed8] hover:bg-[#1e40af] text-white rounded-md flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px]">download</span> Download
+            </a>
+          </div>
+        </div>`).join('');
+    }
+
+    if (!curriculum || !curriculum.length) {
+      el.innerHTML = `<p class="col-span-full text-sm text-[#45464d]">No subjects configured for this class.</p>`;
+      return;
+    }
+    el.innerHTML = curriculum.map(item => {
+      const fileCount = (uploads||[]).filter(u =>
+        String(u.classLevel) === String(cls) &&
+        String(u.subject).toLowerCase() === String(item.subject).toLowerCase()
+      ).length;
+
+      return `
+        <div class="subject-card bg-white border border-[#e2e8f0] rounded-xl p-4 flex flex-col">
+          <div class="flex items-start justify-between mb-2">
+            <div class="w-10 h-10 rounded-lg bg-[#eff6ff] text-[#1d4ed8] flex items-center justify-center">
+              <span class="material-symbols-outlined">menu_book</span>
+            </div>
+            <span class="px-2 py-0.5 rounded-md bg-[#eff6ff] text-[#1d4ed8] text-[10px] font-bold">
+              ${escHtml(item.code || 'CDC 2081')}
+            </span>
+          </div>
+          <h3 class="font-bold text-sm">${escHtml(item.subject)}</h3>
+          <p class="text-xs text-[#45464d] mt-0.5">${escHtml(item.topic || 'CDC Syllabus')}</p>
+          <div class="text-xs text-[#45464d] mt-2 space-y-0.5">
+            <p><span class="font-mono font-bold">${item.chapters || 0}</span> Chapters</p>
+            <p class="${fileCount ? 'text-[#16a34a] font-semibold' : ''}"><span class="font-mono font-bold">${fileCount}</span> Uploaded files</p>
+          </div>
+          <div class="mt-3">
+            <div class="flex justify-between text-[11px] mb-1">
+              <span class="text-[#45464d]">Topic Mastery</span>
+              <span class="font-mono font-bold">${item.prepared}%</span>
+            </div>
+            <div class="w-full bg-[#e5eeff] rounded-full h-1.5">
+              <div class="h-1.5 rounded-full bg-[#1d4ed8]" style="width:${item.prepared}%"></div>
+            </div>
+          </div>
+          <a href="/course-material?class=${encodeURIComponent(cls)}&subject=${encodeURIComponent(item.subject)}"
+             class="mt-3 w-full py-2 rounded-lg bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-semibold flex items-center justify-center gap-1.5">
+            View Material <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </a>
+        </div>`;
+    }).join('');
+  } catch (err) {
+    el.innerHTML = `<p class="col-span-full text-sm text-[#ba1a1a]">Error: ${escHtml(err.message)}</p>`;
+  }
+}
+
+function iconForExt(ext) {
+  const map = { pdf:'picture_as_pdf', doc:'description', docx:'description',
+                ppt:'slideshow', pptx:'slideshow', png:'image', jpg:'image', jpeg:'image' };
+  return map[(ext||'').toLowerCase()] || 'insert_drive_file';
+}
+function escHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+</script>
+</body></html>

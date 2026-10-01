@@ -1,35 +1,38 @@
-// ---------- Teacher dashboard logic ----------
+let IS_SUPERADMIN = false;
 
 document.addEventListener('DOMContentLoaded', async () => {
-  // Logout handlers
   document.getElementById('logoutBtn')?.addEventListener('click', doLogout);
   document.getElementById('mobileLogout')?.addEventListener('click', doLogout);
 
-  // Role check
   try {
     const me = await window.API.getMyProfile();
-    if (me.role !== 'teacher') {
+    if (me.role !== 'teacher' && me.role !== 'superadmin') {
       window.location.href = '/auth';
       return;
     }
+    IS_SUPERADMIN = me.role === 'superadmin';
+
     const nameEl = document.getElementById('teacherName');
     if (nameEl && me.name) nameEl.textContent = me.name;
+
+    if (IS_SUPERADMIN) {
+      document.getElementById('superAdminBanner')?.classList.remove('hidden');
+    }
   } catch (err) {
     console.warn('[Teacher]', err.message);
     window.location.href = '/auth';
     return;
   }
 
-  // Load uploads
   await refreshUploads();
 });
 
 async function doLogout() {
   try { await window.API.logout(); } catch (_) {}
+  try { localStorage.removeItem('shikshya_last_role'); } catch (_) {}
   window.location.href = '/auth';
 }
 
-// ---------- Upload handling ----------
 async function handleUpload(e) {
   e.preventDefault();
 
@@ -41,12 +44,8 @@ async function handleUpload(e) {
   const btn = document.getElementById('uploadBtn');
   const btnText = document.getElementById('uploadBtnText');
 
-  if (!fileInput.files.length) {
-    showMsg('Please choose a file.', 'error'); return;
-  }
-  if (!subject || !classLevel) {
-    showMsg('Subject and Class are required.', 'error'); return;
-  }
+  if (!fileInput.files.length) { showMsg('Please choose a file.', 'error'); return; }
+  if (!subject || !classLevel) { showMsg('Subject and Class are required.', 'error'); return; }
 
   const formData = new FormData();
   formData.append('file', fileInput.files[0]);
@@ -87,7 +86,6 @@ function showMsg(text, type) {
   );
 }
 
-// ---------- Uploaded files list ----------
 async function refreshUploads() {
   const list = document.getElementById('uploadList');
   const countEl = document.getElementById('uploadCount');
@@ -102,27 +100,42 @@ async function refreshUploads() {
       return;
     }
 
-    list.innerHTML = uploads.map(u => `
-      <div class="flex items-center justify-between gap-3 p-3 rounded-lg border border-[#e2e8f0] hover:bg-[#f8fafc]">
-        <div class="flex items-center gap-3 min-w-0">
-          <div class="w-10 h-10 rounded-lg bg-[#eff4ff] flex items-center justify-center text-[#1d4ed8] shrink-0">
-            <span class="material-symbols-outlined text-xl">${iconForExt(u.ext)}</span>
+    list.innerHTML = uploads.map(u => {
+      const courseUrl = `/course-material?class=${encodeURIComponent(u.classLevel)}&subject=${encodeURIComponent(u.subject)}`;
+      const isPdf = (u.ext || '').toLowerCase() === 'pdf';
+      return `
+        <div class="flex items-center justify-between gap-3 p-3 rounded-lg border border-[#e2e8f0] hover:bg-[#f8fafc]">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-10 h-10 rounded-lg bg-[#eff4ff] flex items-center justify-center text-[#1d4ed8] shrink-0">
+              <span class="material-symbols-outlined text-xl">${iconForExt(u.ext)}</span>
+            </div>
+            <div class="min-w-0">
+              <p class="font-semibold text-sm truncate">${escapeHtml(u.title || u.originalName)}</p>
+              <p class="text-xs text-[#45464d] font-mono truncate">
+                Class ${escapeHtml(u.classLevel)} · ${escapeHtml(u.subject)} · ${u.sizeKB} KB · ${escapeHtml(u.uploadedBy)}
+              </p>
+            </div>
           </div>
-          <div class="min-w-0">
-            <p class="font-semibold text-sm truncate">${escapeHtml(u.title || u.originalName)}</p>
-            <p class="text-xs text-[#45464d] font-mono truncate">
-              Class ${escapeHtml(u.classLevel)} · ${escapeHtml(u.subject)} · ${u.sizeKB} KB · ${escapeHtml(u.uploadedBy)}
-            </p>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="${courseUrl}"
+              class="px-3 py-1.5 text-xs font-semibold border border-[#c6c6cd] hover:bg-[#eff4ff] text-[#0b1c30] rounded-md flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px]">visibility</span>
+              View
+            </a>
+            ${isPdf ? `
+              <a href="${u.url}" target="_blank" rel="noopener"
+                class="px-3 py-1.5 text-xs font-semibold border border-[#c6c6cd] hover:bg-[#eff4ff] text-[#0b1c30] rounded-md flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                Open
+              </a>` : ''}
+            <a href="${u.url}" download
+              class="px-3 py-1.5 text-xs font-semibold bg-[#1d4ed8] hover:bg-[#1e40af] text-white rounded-md flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px]">download</span>
+              Download
+            </a>
           </div>
-        </div>
-        <div class="flex items-center gap-2 shrink-0">
-          <a href="${u.url}" download
-            class="px-3 py-1.5 text-xs font-semibold bg-[#1d4ed8] hover:bg-[#1e40af] text-white rounded-md flex items-center gap-1">
-            <span class="material-symbols-outlined text-[14px]">download</span> Download
-          </a>
-        </div>
-      </div>
-    `).join('');
+        </div>`;
+    }).join('');
   } catch (err) {
     list.innerHTML = `<p class="text-sm text-[#ba1a1a]">Could not load uploads: ${err.message}</p>`;
   }

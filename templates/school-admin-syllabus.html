@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>School Syllabus — Shikshya AI</title>
+<link rel="icon" type="image/svg+xml" href="/static/img/logo.svg"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/static/css/styles.css"/>
+<style>
+  body{font-family:'Plus Jakarta Sans',sans-serif;}
+  .class-pill.active{background:#1d4ed8!important;color:#fff!important;border-color:#1d4ed8!important;}
+  .subject-card{transition:.15s;}
+  .subject-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(29,78,216,.10);border-color:#1d4ed8;}
+</style>
+</head>
+<body class="bg-[#f8f9ff] text-[#0b1c30] min-h-screen">
+<div id="layout-root"></div>
+
+<script src="/static/js/api.js"></script>
+<script src="/static/js/nav.js"></script>
+<script src="/static/js/layout.js"></script>
+<script>
+let CURRENT_CLASS = '10';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  let me;
+  try { me = await window.API.getMyProfile(); }
+  catch (_) { window.location.href = '/auth'; return; }
+
+  const role = me.role === 'superadmin' ? 'superadmin'
+             : me.role === 'schooladmin' ? 'schooladmin'
+             : me.role === 'teacher' ? 'teacher' : 'student';
+  const subMap = { schooladmin:'School Admin', teacher:'Teacher', student:'Student', superadmin:'Super Admin' };
+  const avatar = (me.name||'U').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+  let schoolName = '', schoolAddr = '';
+  if (me.schoolId) {
+    try { const s = await window.API.getSchool(me.schoolId); schoolName = s.name; schoolAddr = s.province; } catch(_){}
+  }
+
+  window.renderLayout({
+    role, active:'syllabus',
+    userName: me.name, userSub: subMap[role] || 'User', userAvatar: avatar,
+    schoolName, schoolAddr
+  });
+
+  if (me.role === 'student' && me.classLevel) {
+    CURRENT_CLASS = String(me.classLevel);
+  }
+
+  const content = window.getPageContent();
+  content.innerHTML = `
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div>
+        <h1 class="text-2xl font-extrabold tracking-tight">School Syllabus</h1>
+        <p class="text-sm text-[#45464d] mt-0.5">CDC-aligned curriculum per class (Grades 6–12)</p>
+      </div>
+      <span class="text-xs bg-[#eff6ff] text-[#1d4ed8] font-semibold px-3 py-1.5 rounded-lg border border-[#dbeafe]">
+        Curriculum Development Centre · Nepal
+      </span>
+    </div>
+
+    <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+      <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#1d4ed8]">school</span>
+          <h2 class="font-bold">Choose Grade Level</h2>
+        </div>
+        <p class="text-xs text-[#45464d]">Select a class to view its curriculum</p>
+      </div>
+      <div class="flex flex-wrap gap-2" id="classChips"></div>
+    </div>
+
+    <div id="classBanner" class="bg-white border border-[#e2e8f0] rounded-xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 rounded-lg bg-[#1d4ed8] flex items-center justify-center text-white shrink-0">
+          <span class="material-symbols-outlined text-2xl">menu_book</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h2 class="text-lg font-bold" id="bannerTitle">Class 10 Curriculum</h2>
+            <span class="px-2 py-0.5 rounded-md bg-[#16a34a] text-white text-[11px] font-bold">CDC 2081</span>
+          </div>
+          <p class="text-sm text-[#45464d] mt-1" id="bannerSub">
+            National Curriculum Framework · Secondary Level
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 text-xs font-semibold text-[#1d4ed8] whitespace-nowrap">
+        <span class="material-symbols-outlined text-base">list_alt</span>
+        <span id="subjectCount">—</span>
+      </div>
+    </div>
+
+    <div id="subjectGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <p class="col-span-full text-sm text-[#45464d]">Loading curriculum…</p>
+    </div>
+
+    <div id="emptyState" class="hidden text-center py-12 bg-white border border-dashed border-[#c6c6cd] rounded-xl">
+      <span class="material-symbols-outlined text-4xl text-[#76777d]">inbox</span>
+      <p class="text-sm text-[#45464d] mt-2">No subjects configured for this class yet.</p>
+    </div>`;
+
+  renderChips();
+  await loadClass(CURRENT_CLASS);
+});
+
+function renderChips() {
+  const classes = ['6','7','8','9','10','11','12'];
+  document.getElementById('classChips').innerHTML = classes.map(c => `
+    <button onclick="loadClass('${c}')" class="class-pill ${c === CURRENT_CLASS ? 'active' : ''} px-4 py-2 rounded-lg text-sm font-semibold border bg-white text-[#45464d] border-[#e2e8f0] hover:bg-[#eff4ff] transition-colors">
+      Class ${c}
+    </button>`).join('');
+}
+
+async function loadClass(cls) {
+  CURRENT_CLASS = String(cls);
+  document.querySelectorAll('.class-pill').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === `Class ${cls}`);
+  });
+
+  const grid = document.getElementById('subjectGrid');
+  const empty = document.getElementById('emptyState');
+  grid.innerHTML = `<p class="col-span-full text-sm text-[#45464d]">Loading Class ${cls} subjects…</p>`;
+  empty.classList.add('hidden');
+
+  document.getElementById('bannerTitle').textContent = `Class ${cls} Curriculum`;
+  document.getElementById('bannerSub').textContent =
+    cls === '10' ? 'SEE Board Pattern · National Curriculum Framework' :
+    cls === '9'  ? 'Pre-SEE Foundation · National Curriculum Framework' :
+    (cls === '11' || cls === '12') ? 'NEB Grade ' + cls + ' Curriculum' :
+    'Secondary Level · National Curriculum Framework';
+
+  try {
+    const { curriculum, total } = await window.API.getCurriculum(cls);
+    document.getElementById('subjectCount').textContent =
+      total === 0 ? 'No subjects' :
+      total === 1 ? '1 Subject' : `${total} Subjects`;
+
+    if (!curriculum || !curriculum.length) {
+      grid.innerHTML = '';
+      empty.classList.remove('hidden');
+      return;
+    }
+
+    grid.innerHTML = curriculum.map(item => `
+      <div class="subject-card bg-white border border-[#e2e8f0] rounded-xl p-4 flex flex-col">
+        <div class="flex items-start justify-between mb-2">
+          <div class="w-10 h-10 rounded-lg bg-[#eff6ff] text-[#1d4ed8] flex items-center justify-center">
+            <span class="material-symbols-outlined">menu_book</span>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-[#eff6ff] text-[#1d4ed8] text-[10px] font-bold">
+            ${escHtml(item.code || 'CDC 2081')}
+          </span>
+        </div>
+
+        <h3 class="font-bold text-sm">${escHtml(item.subject)}</h3>
+        <p class="text-xs text-[#45464d] mt-0.5">${escHtml(item.topic || 'CDC Syllabus')}</p>
+
+        <div class="text-xs text-[#45464d] mt-2 space-y-0.5">
+          <p><span class="font-mono font-bold">${item.chapters || 0}</span> Chapters</p>
+          ${item.problems ? `<p><span class="font-mono font-bold">${item.problems}+</span> Solved Problems</p>` : ''}
+          ${item.videos ? `<p><span class="font-mono font-bold">${item.videos}</span> Video Notes</p>` : ''}
+        </div>
+
+        <div class="mt-3">
+          <div class="flex justify-between text-[11px] mb-1">
+            <span class="text-[#45464d]">Topic Mastery</span>
+            <span class="font-mono font-bold">${item.prepared}%</span>
+          </div>
+          <div class="w-full bg-[#e5eeff] rounded-full h-1.5">
+            <div class="h-1.5 rounded-full bg-[#1d4ed8]" style="width:${item.prepared}%"></div>
+          </div>
+        </div>
+
+        <a href="/course-material?class=${encodeURIComponent(cls)}&subject=${encodeURIComponent(item.subject)}"
+           class="mt-3 w-full py-2 rounded-lg bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-semibold flex items-center justify-center gap-1.5">
+          View Material <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </a>
+      </div>`).join('');
+  } catch (err) {
+    grid.innerHTML = `<p class="col-span-full text-sm text-[#ba1a1a]">Error: ${escHtml(err.message)}</p>`;
+  }
+}
+
+function escHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+</script>
+</body></html>
