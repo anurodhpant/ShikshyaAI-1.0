@@ -6,6 +6,7 @@
   const MENU = {
     schooladmin: [
       { key:'dashboard',     label:'Dashboard',           icon:'dashboard',      href:'/school-admin' },
+      { key:'profile',       label:'My Profile',          icon:'person',         href:'/profile' },
       { key:'students',      label:'Students',            icon:'face',           href:'/students-list' },
       { key:'teachers',      label:'Teachers',            icon:'group',          href:'/teachers-list' },
       { key:'classes',       label:'Classes & Sections',  icon:'class',          href:'/school-admin/classes' },
@@ -14,11 +15,11 @@
       { key:'assignments',   label:'Assignments',         icon:'assignment',     href:'/school-admin/assignments' },
       { key:'progress',      label:'Student Progress',    icon:'trending_up',    href:'/school-admin/student-progress' },
       { key:'reports',       label:'Reports & Analytics', icon:'bar_chart',      href:'/school-admin/reports' },
-      { key:'announcements', label:'Announcements',       icon:'campaign',       href:'/school-admin/announcements' },
-      { key:'settings',      label:'School Settings',     icon:'settings',       href:'/school-admin/classes' }
+      { key:'announcements', label:'Announcements',       icon:'campaign',       href:'/school-admin/announcements' }
     ],
     teacher: [
       { key:'dashboard',     label:'Dashboard',           icon:'dashboard',      href:'/teacher' },
+      { key:'profile',       label:'My Profile',          icon:'person',         href:'/profile' },
       { key:'students',      label:'My Students',         icon:'face',           href:'/students-list' },
       { key:'teachers',      label:'Teachers',            icon:'group',          href:'/teachers-list' },
       { key:'materials',     label:'Course Material',     icon:'library_books',  href:'/course-materials-list' },
@@ -28,6 +29,7 @@
     ],
     student: [
       { key:'dashboard',     label:'Dashboard',           icon:'dashboard',      href:'/student' },
+      { key:'profile',       label:'My Profile',          icon:'person',         href:'/profile' },
       { key:'teachers',      label:'My Teachers',         icon:'group',          href:'/teachers-list' },
       { key:'students',      label:'Classmates',          icon:'face',           href:'/students-list' },
       { key:'syllabus',      label:'Syllabus',            icon:'menu_book',      href:'/school-admin/syllabus' },
@@ -36,6 +38,7 @@
     ],
     superadmin: [
       { key:'dashboard',     label:'Dashboard',           icon:'dashboard',      href:'/super-admin' },
+      { key:'profile',       label:'My Profile',          icon:'person',         href:'/profile' },
       { key:'teachers',      label:'Teachers',            icon:'group',          href:'/teachers-list' },
       { key:'students',      label:'Students',            icon:'face',           href:'/students-list' },
       { key:'materials',     label:'Course Material',     icon:'library_books',  href:'/course-materials-list' },
@@ -84,12 +87,10 @@
     return `
       <header class="w-full bg-white border-b border-[#e2e8f0] px-4 md:px-6 flex justify-between items-center h-16 sticky top-0 z-20">
         <div class="flex items-center gap-3">
-          <button data-nav-back aria-label="Go back"
-            class="w-8 h-8 rounded-lg hover:bg-[#eff4ff] flex items-center justify-center text-[#45464d] cursor-pointer">
+          <button data-nav-back class="w-8 h-8 rounded-lg hover:bg-[#eff4ff] flex items-center justify-center text-[#45464d] cursor-pointer">
             <span class="material-symbols-outlined text-lg">arrow_back</span>
           </button>
-          <button data-nav-forward aria-label="Go forward"
-            class="w-8 h-8 rounded-lg hover:bg-[#eff4ff] flex items-center justify-center text-[#45464d] cursor-pointer">
+          <button data-nav-forward class="w-8 h-8 rounded-lg hover:bg-[#eff4ff] flex items-center justify-center text-[#45464d] cursor-pointer">
             <span class="material-symbols-outlined text-lg">arrow_forward</span>
           </button>
           ${o.schoolName ? `
@@ -108,11 +109,8 @@
             <span class="material-symbols-outlined text-xl">notifications</span>
             <span class="absolute top-2 right-2 w-1.5 h-1.5 bg-[#ba1a1a] rounded-full"></span>
           </button>
-          <button class="w-9 h-9 rounded-full flex items-center justify-center text-[#45464d] hover:bg-[#eff4ff]">
-            <span class="material-symbols-outlined text-xl">chat_bubble</span>
-          </button>
           <div class="flex items-center gap-2 pl-2 border-l border-[#e2e8f0]">
-            <div class="w-9 h-9 rounded-full bg-[#1d4ed8] text-white flex items-center justify-center text-xs font-bold">${esc(o.userAvatar || 'U')}</div>
+            <a href="/profile" title="My Profile" class="w-9 h-9 rounded-full bg-[#1d4ed8] text-white flex items-center justify-center text-xs font-bold hover:opacity-90 cursor-pointer">${esc(o.userAvatar || 'U')}</a>
             <div class="hidden md:block">
               <p class="text-xs font-bold leading-tight">${esc(o.userName || 'User')}</p>
               <p class="text-[10px] text-[#76777d] leading-tight">${esc(o.userSub || '')}</p>

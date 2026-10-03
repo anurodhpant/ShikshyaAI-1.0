@@ -185,13 +185,16 @@
               class="w-full px-3.5 py-2.5 border border-[#c6c6cd] rounded-lg text-sm bg-[#f9fafb] font-mono focus:outline-none"/>
           </div>
 
+          <!-- LOGIN PASSWORD with eye toggle -->
           <div>
             <label class="block text-sm font-semibold mb-1.5" for="password">Password</label>
             <div class="relative">
               <input id="password" type="password" required
-                class="w-full px-3.5 py-2.5 pr-10 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none"/>
-              <button type="button" onclick="togglePassword('password','pwIcon')"
-                class="absolute inset-y-0 right-0 pr-3 flex items-center text-[#45464d]">
+                class="w-full px-3.5 py-2.5 pr-11 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]"
+                placeholder="Enter your password"/>
+              <button type="button" aria-label="Show or hide password"
+                onclick="togglePassword('password','pwIcon')"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-[#45464d] hover:text-[#0b1c30]">
                 <span id="pwIcon" class="material-symbols-outlined text-lg">visibility</span>
               </button>
             </div>
@@ -205,8 +208,7 @@
 
           <div id="loginError" class="hidden text-sm text-[#ba1a1a] bg-[#ffdad6] border border-[#fecaca] rounded-lg px-3 py-2"></div>
 
-          <!-- Demo credentials — REQUIRED by auth.js -->
-          <div class="p-3.5 rounded-lg bg-[#eff6ff] border border-[#dbeafe]">
+          <div id="demoCredsBlock" class="p-3.5 rounded-lg bg-[#eff6ff] border border-[#dbeafe]">
             <p class="text-xs font-bold text-[#1d4ed8]">Demo credentials (<span id="demoRole">student</span>)</p>
             <p id="demoCreds" class="text-xs text-[#45464d] mt-1 font-mono">student.aarav@kmhss.edu.np / student123</p>
           </div>
@@ -243,10 +245,22 @@
               <option value="12">Class 12</option>
             </select>
           </div>
+
+          <!-- SIGNUP PASSWORD with eye toggle -->
           <div>
             <label class="block text-sm font-semibold mb-1.5" for="su_password">Password <span class="text-[#ba1a1a]">*</span></label>
-            <input id="su_password" type="password" required minlength="4" class="w-full px-3.5 py-2.5 border border-[#c6c6cd] rounded-lg text-sm bg-white"/>
+            <div class="relative">
+              <input id="su_password" type="password" required minlength="8"
+                class="w-full px-3.5 py-2.5 pr-11 border border-[#c6c6cd] rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1d4ed8]/30 focus:border-[#1d4ed8]"
+                placeholder="At least 8 characters"/>
+              <button type="button" aria-label="Show or hide password"
+                onclick="togglePassword('su_password','su_pwIcon')"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-[#45464d] hover:text-[#0b1c30]">
+                <span id="su_pwIcon" class="material-symbols-outlined text-lg">visibility</span>
+              </button>
+            </div>
           </div>
+
           <button id="signupBtn" type="submit"
             class="w-full py-3 rounded-lg bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-semibold text-sm flex items-center justify-center gap-2">
             <span id="signupText">Create Account</span>
@@ -261,7 +275,7 @@
 
 </div>
 
-<script src="/static/js/api.js?v=101"></script>
-<script src="/static/js/nav.js?v=101"></script>
-<script src="/static/js/auth.js?v=101"></script>
+<script src="/static/js/api.js?v=108"></script>
+<script src="/static/js/nav.js?v=108"></script>
+<script src="/static/js/auth.js?v=108"></script>
 </body></html>

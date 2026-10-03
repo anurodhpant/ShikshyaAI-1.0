@@ -1,45 +1,17 @@
 {
   "schools": [
     {
-      "id": "KTM-0842",
-      "name": "Shree Himalaya Secondary School",
-      "province": "Kathmandu, Nepal",
-      "classes": "6-12",
-      "status": "active",
-      "students": 682,
-      "teachers": 48,
-      "aiEnabled": 98,
-      "principal": "Anita Sharma"
-    },
-    {
-      "id": "PKR-0119",
-      "name": "Pokhara Higher Academy",
-      "province": "Gandaki",
-      "classes": "8-12",
-      "status": "active",
-      "students": 320,
-      "teachers": 19,
-      "aiEnabled": 91
-    },
-    {
-      "id": "LTP-0034",
-      "name": "Lalitpur CDC Public School",
+      "id": "AA-123",
+      "name": "Aditya School",
       "province": "Bagmati",
-      "classes": "6-10",
-      "status": "suspended",
-      "students": 410,
-      "teachers": 22,
-      "aiEnabled": 0
-    },
-    {
-      "id": "BRT-0451",
-      "name": "Biratnagar National Secondary",
-      "province": "Koshi",
+      "address": "Baneshwor",
       "classes": "6-12",
       "status": "active",
-      "students": 480,
-      "teachers": 25,
-      "aiEnabled": 87
+      "students": 0,
+      "teachers": 0,
+      "aiEnabled": 0,
+      "lat": null,
+      "lng": null
     }
   ],
   "users": [
@@ -48,228 +20,129 @@
       "email": "superadmin.cdc@moest.gov.np",
       "phone": "+977-9800000001",
       "address": "CDC Sanothimi, Bhaktapur",
-      "password": "admin123",
+      "password": "admin1234",
       "role": "superadmin",
-      "name": "Anurodh Pant",
-      "schoolId": ""
+      "name": "National CDC Admin"
     },
     {
-      "id": "u2",
+      "id": "u1791035339613",
       "email": "principal@kmhss.edu.np",
-      "phone": "+977-9800000002",
-      "address": "Kathmandu",
+      "phone": "9709192877",
+      "address": "",
       "password": "admin123",
       "role": "schooladmin",
-      "name": "Anita Sharma",
-      "schoolId": "BRT-0451"
+      "name": "Principal",
+      "schoolId": "AA-123"
     },
     {
-      "id": "u3",
-      "email": "t.subedi@kmhss.edu.np",
-      "phone": "+977-9800000003",
-      "address": "CDC Sanothimi, Bhaktapur",
-      "password": "teacher123",
-      "role": "teacher",
-      "name": "Sunita Rai",
-      "schoolId": "KTM-0842"
+      "id": "u1791035381419",
+      "email": "anurodhpant@gmail.com",
+      "phone": "9709192877",
+      "address": "Sanagaun",
+      "password": "password123",
+      "role": "student",
+      "name": "Anurodh Pant",
+      "schoolId": "AA-123",
+      "classLevel": "10",
+      "section": "A"
     },
     {
-      "id": "u4",
+      "id": "u1791035403031",
       "email": "student.aarav@kmhss.edu.np",
-      "phone": "+977-9800000004",
-      "address": "Kathmandu",
+      "phone": "",
+      "address": "",
       "password": "student123",
       "role": "student",
-      "name": "Aarav Shrestha",
-      "schoolId": "KTM-0842",
+      "name": "Student.Aarav",
+      "schoolId": "AA-123",
       "classLevel": "10"
     },
     {
-      "id": "u1790856904288",
-      "email": "anurodhpant@gmail.com",
-      "phone": "+977-9865432345",
-      "address": "CDC Sanothimi, Bhaktapur",
-      "password": "admin123",
-      "role": "schooladmin",
+      "id": "u1791035451368",
+      "email": "t.subedi@kmhss.edu.np",
+      "phone": "",
+      "address": "",
+      "password": "teacher123",
+      "role": "teacher",
+      "name": "T.Subedi",
+      "schoolId": "AA-123"
+    },
+    {
+      "id": "u1791035503093",
+      "email": "a.pant.3922@westcliff.edu",
+      "phone": "",
+      "address": "",
+      "password": "student123",
+      "role": "student",
+      "name": "A.Pant.3922",
+      "schoolId": "AA-123",
+      "classLevel": "10"
+    },
+    {
+      "id": "u1791036611594",
+      "email": "aa@gmail.com",
+      "phone": "98767546464",
+      "address": "Lalitpur",
+      "password": "teacher123",
+      "role": "teacher",
+      "name": "Aa",
+      "schoolId": "AA-123"
+    },
+    {
+      "id": "u1791037697885",
+      "email": "ap@gmail.com",
+      "phone": "",
+      "address": "",
+      "password": "Anurodh@123#",
+      "role": "teacher",
       "name": "Anurodh Pant",
-      "schoolId": "KTM-0842"
+      "schoolId": "AA-123"
     }
   ],
   "teachers": [
     {
-      "id": "T-001",
-      "name": "Sunita Rai",
-      "subject": "Mathematics",
-      "email": "t.subedi@kmhss.edu.np",
-      "phone": "+977-9800000003",
-      "classes": [
-        "9",
-        "10"
-      ],
-      "schoolId": "KTM-0842",
-      "avatar": "SR",
-      "joined": "2021-04-12",
+      "id": "T-11629",
+      "name": "Aa",
+      "subject": "Faculty",
+      "email": "aa@gmail.com",
+      "phone": "98767546464",
+      "address": "Lalitpur",
+      "classes": [],
+      "schoolId": "AA-123",
+      "avatar": "A",
+      "joined": "2026-10-03",
       "status": "active",
-      "portalUser": "u3"
+      "portalUser": "u1791036611594"
     },
     {
-      "id": "T-002",
-      "name": "Rajesh Kumar",
-      "subject": "Science",
-      "email": "r.kumar@kmhss.edu.np",
-      "phone": "+977-9800000010",
-      "classes": [
-        "9",
-        "10",
-        "11"
-      ],
-      "schoolId": "KTM-0842",
-      "avatar": "RK",
-      "joined": "2019-06-01",
-      "status": "active"
-    },
-    {
-      "id": "T-003",
-      "name": "Priya Thapa",
-      "subject": "English",
-      "email": "p.thapa@kmhss.edu.np",
-      "phone": "+977-9800000011",
-      "classes": [
-        "8",
-        "9",
-        "10"
-      ],
-      "schoolId": "KTM-0842",
-      "avatar": "PT",
-      "joined": "2020-02-15",
-      "status": "active"
-    },
-    {
-      "id": "T-004",
-      "name": "Bikash Adhikari",
-      "subject": "Nepali",
-      "email": "b.adhikari@kmhss.edu.np",
-      "phone": "+977-9800000012",
-      "classes": [
-        "6",
-        "7",
-        "8"
-      ],
-      "schoolId": "KTM-0842",
-      "avatar": "BA",
-      "joined": "2018-08-20",
-      "status": "active"
-    },
-    {
-      "id": "T-005",
-      "name": "Anjali Gurung",
-      "subject": "Social Studies",
-      "email": "a.gurung@kmhss.edu.np",
-      "phone": "+977-9800000013",
-      "classes": [
-        "9",
-        "10"
-      ],
-      "schoolId": "KTM-0842",
-      "avatar": "AG",
-      "joined": "2022-01-05",
-      "status": "active"
-    },
-    {
-      "id": "T-006",
-      "name": "Suresh Bhandari",
-      "subject": "Computer Science",
-      "email": "s.bhandari@kmhss.edu.np",
-      "phone": "+977-9800000014",
-      "classes": [
-        "9",
-        "10"
-      ],
-      "schoolId": "KTM-0842",
-      "avatar": "SB",
-      "joined": "2020-09-11",
-      "status": "active"
+      "id": "T-97885",
+      "name": "Anurodh Pant",
+      "subject": "Faculty",
+      "email": "ap@gmail.com",
+      "phone": "",
+      "classes": [],
+      "schoolId": "AA-123",
+      "avatar": "AP",
+      "joined": "2026-10-03",
+      "status": "active",
+      "portalUser": "u1791037697885"
     }
   ],
   "students": [
     {
-      "id": "S-101",
-      "name": "Aarav Shrestha",
+      "id": "S-81419",
+      "name": "Anurodh Pant",
       "classLevel": "10",
       "section": "A",
-      "roll": 14,
-      "email": "student.aarav@kmhss.edu.np",
-      "phone": "+977-9800000004",
-      "schoolId": "KTM-0842",
-      "gpa": 3.65,
-      "avatar": "AS",
+      "roll": null,
+      "email": "anurodhpant@gmail.com",
+      "phone": "9709192877",
+      "address": "Sanagaun",
+      "schoolId": "AA-123",
+      "gpa": null,
+      "avatar": "AP",
       "status": "active",
-      "portalUser": "u4"
-    },
-    {
-      "id": "S-102",
-      "name": "Sujata Karki",
-      "classLevel": "10",
-      "section": "A",
-      "roll": 2,
-      "email": "s.karki@kmhss.edu.np",
-      "phone": "+977-9800000020",
-      "schoolId": "KTM-0842",
-      "gpa": 3.9,
-      "avatar": "SK",
-      "status": "active"
-    },
-    {
-      "id": "S-103",
-      "name": "Sujal Shrestha",
-      "classLevel": "9",
-      "section": "B",
-      "roll": 7,
-      "email": "s.shrestha@kmhss.edu.np",
-      "phone": "+977-9800000021",
-      "schoolId": "KTM-0842",
-      "gpa": 3.4,
-      "avatar": "SS",
-      "status": "active"
-    },
-    {
-      "id": "S-104",
-      "name": "Ramesh Thapa",
-      "classLevel": "8",
-      "section": "A",
-      "roll": 12,
-      "email": "r.thapa@kmhss.edu.np",
-      "phone": "+977-9800000022",
-      "schoolId": "KTM-0842",
-      "gpa": 3.2,
-      "avatar": "RT",
-      "status": "active"
-    },
-    {
-      "id": "S-105",
-      "name": "Nisha Lama",
-      "classLevel": "7",
-      "section": "A",
-      "roll": 5,
-      "email": "n.lama@kmhss.edu.np",
-      "phone": "+977-9800000023",
-      "schoolId": "KTM-0842",
-      "gpa": 3.7,
-      "avatar": "NL",
-      "status": "active"
-    },
-    {
-      "id": "S-106",
-      "name": "Prakash Rai",
-      "classLevel": "6",
-      "section": "A",
-      "roll": 9,
-      "email": "p.rai@kmhss.edu.np",
-      "phone": "+977-9800000024",
-      "schoolId": "KTM-0842",
-      "gpa": 3.5,
-      "avatar": "PR",
-      "status": "active"
+      "portalUser": "u1791035381419"
     }
   ],
   "classes": [
@@ -277,50 +150,50 @@
       "id": "6A",
       "classLevel": "6",
       "section": "A",
-      "students": 58,
-      "teacher": "Bikash Adhikari"
+      "students": 0,
+      "teacher": ""
     },
     {
       "id": "7A",
       "classLevel": "7",
       "section": "A",
-      "students": 72,
-      "teacher": "Bikash Adhikari"
+      "students": 0,
+      "teacher": ""
     },
     {
       "id": "8A",
       "classLevel": "8",
       "section": "A",
-      "students": 86,
-      "teacher": "Priya Thapa"
+      "students": 0,
+      "teacher": ""
     },
     {
-      "id": "9B",
+      "id": "9A",
       "classLevel": "9",
-      "section": "B",
-      "students": 94,
-      "teacher": "Sunita Rai"
+      "section": "A",
+      "students": 0,
+      "teacher": ""
     },
     {
       "id": "10A",
       "classLevel": "10",
       "section": "A",
-      "students": 102,
-      "teacher": "Sunita Rai"
+      "students": 0,
+      "teacher": ""
     },
     {
       "id": "11A",
       "classLevel": "11",
       "section": "A",
-      "students": 98,
-      "teacher": "Rajesh Kumar"
+      "students": 0,
+      "teacher": ""
     },
     {
       "id": "12A",
       "classLevel": "12",
       "section": "A",
-      "students": 92,
-      "teacher": "Rajesh Kumar"
+      "students": 0,
+      "teacher": ""
     }
   ],
   "subjects": [
@@ -423,7 +296,6 @@
       "chapters": 21,
       "problems": null,
       "videos": 24,
-      "prepared": 58,
       "topic": "Heredity & Genetics"
     },
     {
@@ -434,7 +306,6 @@
       "chapters": 18,
       "problems": 340,
       "videos": null,
-      "prepared": 42,
       "topic": "Algebra"
     },
     {
@@ -445,7 +316,6 @@
       "chapters": 14,
       "problems": null,
       "videos": null,
-      "prepared": 35,
       "topic": "Grammar"
     },
     {
@@ -456,7 +326,6 @@
       "chapters": 16,
       "problems": null,
       "videos": 12,
-      "prepared": 25,
       "topic": "Kavita"
     },
     {
@@ -467,7 +336,6 @@
       "chapters": 10,
       "problems": null,
       "videos": 15,
-      "prepared": 50,
       "topic": "Civics"
     },
     {
@@ -478,7 +346,6 @@
       "chapters": 14,
       "problems": null,
       "videos": 20,
-      "prepared": 18,
       "topic": "Vectors"
     },
     {
@@ -489,7 +356,6 @@
       "chapters": 12,
       "problems": 120,
       "videos": null,
-      "prepared": 44,
       "topic": "Programming"
     },
     {
@@ -500,7 +366,6 @@
       "chapters": 15,
       "problems": 280,
       "videos": null,
-      "prepared": 60,
       "topic": "Algebra"
     },
     {
@@ -511,7 +376,6 @@
       "chapters": 19,
       "problems": null,
       "videos": 18,
-      "prepared": 52,
       "topic": "Force"
     },
     {
@@ -522,7 +386,6 @@
       "chapters": 12,
       "problems": null,
       "videos": null,
-      "prepared": 48,
       "topic": "Reading"
     },
     {
@@ -533,7 +396,6 @@
       "chapters": 14,
       "problems": null,
       "videos": null,
-      "prepared": 40,
       "topic": "Nibandha"
     },
     {
@@ -544,7 +406,6 @@
       "chapters": 14,
       "problems": 200,
       "videos": null,
-      "prepared": 55,
       "topic": "Geometry"
     },
     {
@@ -555,7 +416,6 @@
       "chapters": 20,
       "problems": null,
       "videos": 16,
-      "prepared": 46,
       "topic": "Matter"
     },
     {
@@ -566,7 +426,6 @@
       "chapters": 11,
       "problems": null,
       "videos": null,
-      "prepared": 50,
       "topic": "Writing"
     },
     {
@@ -577,7 +436,6 @@
       "chapters": 13,
       "problems": null,
       "videos": null,
-      "prepared": 44,
       "topic": "Katha"
     },
     {
@@ -588,7 +446,6 @@
       "chapters": 12,
       "problems": 180,
       "videos": null,
-      "prepared": 62,
       "topic": "Integers"
     },
     {
@@ -599,7 +456,6 @@
       "chapters": 18,
       "problems": null,
       "videos": 14,
-      "prepared": 55,
       "topic": "Living Beings"
     },
     {
@@ -610,7 +466,6 @@
       "chapters": 10,
       "problems": null,
       "videos": null,
-      "prepared": 60,
       "topic": "Grammar"
     },
     {
@@ -621,7 +476,6 @@
       "chapters": 10,
       "problems": 150,
       "videos": null,
-      "prepared": 70,
       "topic": "Basic Algebra"
     },
     {
@@ -632,7 +486,6 @@
       "chapters": 15,
       "problems": null,
       "videos": 12,
-      "prepared": 60,
       "topic": "Plants"
     },
     {
@@ -643,7 +496,6 @@
       "chapters": 10,
       "problems": null,
       "videos": null,
-      "prepared": 66,
       "topic": "Reading"
     },
     {
@@ -654,7 +506,6 @@
       "chapters": 12,
       "problems": null,
       "videos": null,
-      "prepared": 58,
       "topic": "Kavita"
     },
     {
@@ -665,7 +516,6 @@
       "chapters": 22,
       "problems": 260,
       "videos": 18,
-      "prepared": 30,
       "topic": "Mechanics"
     },
     {
@@ -676,7 +526,6 @@
       "chapters": 20,
       "problems": 240,
       "videos": 20,
-      "prepared": 28,
       "topic": "Atomic Structure"
     },
     {
@@ -687,7 +536,6 @@
       "chapters": 18,
       "problems": 220,
       "videos": null,
-      "prepared": 32,
       "topic": "Calculus"
     },
     {
@@ -698,7 +546,6 @@
       "chapters": 24,
       "problems": 300,
       "videos": 22,
-      "prepared": 25,
       "topic": "Electromagnetism"
     },
     {
@@ -709,7 +556,6 @@
       "chapters": 22,
       "problems": 280,
       "videos": 24,
-      "prepared": 22,
       "topic": "Organic Chemistry"
     },
     {
@@ -720,147 +566,395 @@
       "chapters": 20,
       "problems": 260,
       "videos": null,
-      "prepared": 28,
       "topic": "Vectors"
     }
   ],
-  "assignments": [
+  "assignments": [],
+  "activity": [],
+  "uploads": [
     {
-      "id": "A-01",
-      "title": "Algebra Practice",
+      "id": "up1791035477236",
+      "title": "Mathematics",
+      "filename": "c2a4320a_grade-6-mathematics.pdf",
+      "originalName": "grade-6-mathematics.pdf",
+      "ext": "pdf",
+      "sizeKB": 22656.6,
       "subject": "Mathematics",
-      "classLevel": "9",
-      "section": "B",
-      "due": "Oct 1, 2025",
-      "status": "Pending",
-      "uploadedBy": "Sunita Rai",
-      "schoolId": "KTM-0842"
-    },
-    {
-      "id": "A-02",
-      "title": "Essay Writing",
-      "subject": "English",
-      "classLevel": "8",
-      "section": "A",
-      "due": "Oct 2, 2025",
-      "status": "Pending",
-      "uploadedBy": "Priya Thapa",
-      "schoolId": "KTM-0842"
-    },
-    {
-      "id": "A-03",
-      "title": "Science MCQ",
-      "subject": "Science",
-      "classLevel": "7",
-      "section": "A",
-      "due": "Oct 3, 2025",
-      "status": "Pending",
-      "uploadedBy": "Rajesh Kumar",
-      "schoolId": "KTM-0842"
-    },
-    {
-      "id": "A-04",
-      "title": "Nepali Grammar",
-      "subject": "Nepali",
       "classLevel": "6",
-      "section": "A",
-      "due": "Oct 4, 2025",
-      "status": "Completed",
-      "uploadedBy": "Bikash Adhikari",
-      "schoolId": "KTM-0842"
-    },
-    {
-      "id": "A-05",
-      "title": "Chapter Test",
-      "subject": "Mathematics",
-      "classLevel": "10",
-      "section": "A",
-      "due": "Oct 5, 2025",
-      "status": "Pending",
-      "uploadedBy": "Sunita Rai",
-      "schoolId": "KTM-0842"
+      "uploadedBy": "T.Subedi",
+      "uploadedById": "u1791035451368",
+      "schoolId": "AA-123",
+      "uploadedAt": "2026-10-03T13:51:17.236633Z",
+      "url": "/static/uploads/c2a4320a_grade-6-mathematics.pdf"
     }
   ],
-  "activity": [
-    {
-      "id": "act-1",
-      "type": "student_added",
-      "text": "New student added: Ramesh Thapa (Class 8)",
-      "time": "2 hours ago",
-      "icon": "person_add",
-      "color": "text-[#0051d5]"
-    },
-    {
-      "id": "act-2",
-      "type": "teacher_added",
-      "text": "Teacher added: Sujata Karki (Mathematics)",
-      "time": "4 hours ago",
-      "icon": "group_add",
-      "color": "text-[#7c3aed]"
-    },
-    {
-      "id": "act-3",
-      "type": "assignment",
-      "text": "Assignment created: Algebra Practice (Class 9)",
-      "time": "6 hours ago",
-      "icon": "assignment_add",
-      "color": "text-[#ea580c]"
-    },
-    {
-      "id": "act-4",
-      "type": "ai_practice",
-      "text": "Student completed AI practice: Sujal Shrestha (Class 7)",
-      "time": "8 hours ago",
-      "icon": "smart_toy",
-      "color": "text-[#0891b2]"
-    },
-    {
-      "id": "act-5",
-      "type": "syllabus",
-      "text": "Syllabus updated: Mathematics (Class 10)",
-      "time": "1 day ago",
-      "icon": "menu_book",
-      "color": "text-[#16a34a]"
-    }
-  ],
-  "announcements": [
-    {
-      "id": "AN-1",
-      "title": "Parent-Teacher Meeting",
-      "body": "Scheduled for October 15. All parents are invited to attend the PTM in the main hall at 9 AM.",
-      "time": "2 days ago",
-      "author": "Principal",
-      "icon": "event",
-      "color": "bg-[#eff6ff] text-[#1d4ed8]",
-      "schoolId": "KTM-0842"
-    },
-    {
-      "id": "AN-2",
-      "title": "Mid-term Exams Begin",
-      "body": "Mid-term exams begin November 1. Timetable has been posted on the notice board and shared with class teachers.",
-      "time": "5 days ago",
-      "author": "Admin Office",
-      "icon": "assignment",
-      "color": "bg-[#fef3c7] text-[#92400e]",
-      "schoolId": "KTM-0842"
-    },
-    {
-      "id": "AN-3",
-      "title": "Sports Week Announced",
-      "body": "Annual sports week from December 5–10. Registration open for all classes.",
-      "time": "1 week ago",
-      "author": "Sports Dept",
-      "icon": "sports_soccer",
-      "color": "bg-[#dcfce7] text-[#16a34a]",
-      "schoolId": "KTM-0842"
-    }
-  ],
-  "uploads": [],
   "auditLogs": [
     {
-      "id": "a1790857310421",
+      "id": "a1791037710119",
       "action": "Login successful",
-      "user": "Sunita Rai",
+      "user": "Student.Aarav",
+      "userId": "u1791035403031",
+      "userRole": "student",
+      "target": "role:student",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
+    },
+    {
+      "id": "a1791037697926",
+      "action": "User Registered",
+      "user": "Anurodh Pant",
+      "userId": "u1791037697885",
+      "userRole": "teacher",
+      "target": "role:teacher · ap@gmail.com",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "person_add"
+    },
+    {
+      "id": "a1791037650377",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "192.168.1.72",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791037650208",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "192.168.1.72",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791037650029",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "192.168.1.72",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791037649751",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "192.168.1.72",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791037649554",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "192.168.1.72",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791037649366",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "192.168.1.72",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791037648649",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "192.168.1.72",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791037624530",
+      "action": "Login successful",
+      "user": "Student.Aarav",
+      "userId": "u1791035403031",
+      "userRole": "student",
+      "target": "role:student",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
+    },
+    {
+      "id": "a1791037055711",
+      "action": "Login successful",
+      "user": "National CDC Admin",
+      "userId": "u1",
+      "userRole": "superadmin",
+      "target": "role:superadmin",
+      "ip": "127.0.0.1",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
+    },
+    {
+      "id": "a1791036843839",
+      "action": "Login successful",
+      "user": "Aa",
+      "userId": "u1791036611594",
+      "userRole": "teacher",
+      "target": "role:teacher",
+      "ip": "127.0.0.1",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
+    },
+    {
+      "id": "a1791036839269",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036839094",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036838973",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036838843",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036838650",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036838475",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036838313",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036838133",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036837971",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036836494",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036836326",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036836149",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036835964",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036835809",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036834085",
+      "action": "Role mismatch on login",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "tried:teacher actual:student",
+      "ip": "127.0.0.1",
+      "result": "DENIED",
+      "time": "just now",
+      "icon": "gpp_bad"
+    },
+    {
+      "id": "a1791036611655",
+      "action": "Registered on login",
+      "user": "Aa",
+      "userId": "u1791036611594",
+      "userRole": "teacher",
+      "target": "role:teacher · aa@gmail.com",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "person_add"
+    },
+    {
+      "id": "a1791035911666",
+      "action": "Login successful",
+      "user": "Anurodh Pant",
+      "userId": "u1791035381419",
+      "userRole": "student",
+      "target": "role:student",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
+    },
+    {
+      "id": "a1791035851805",
+      "action": "Login successful",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "role:student",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
+    },
+    {
+      "id": "a1791035798971",
+      "action": "Login successful",
+      "user": "T.Subedi",
+      "userId": "u1791035451368",
+      "userRole": "teacher",
       "target": "role:teacher",
       "ip": "192.168.1.72",
       "result": "SUCCESS",
@@ -868,64 +962,168 @@
       "icon": "key"
     },
     {
-      "id": "a1790856904342",
+      "id": "a1791035776603",
+      "action": "Login successful",
+      "user": "Student.Aarav",
+      "userId": "u1791035403031",
+      "userRole": "student",
+      "target": "role:student",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
+    },
+    {
+      "id": "a1791035733223",
+      "action": "Login successful",
+      "user": "T.Subedi",
+      "userId": "u1791035451368",
+      "userRole": "teacher",
+      "target": "role:teacher",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
+    },
+    {
+      "id": "a1791035589085",
+      "action": "Login successful",
+      "user": "Student.Aarav",
+      "userId": "u1791035403031",
+      "userRole": "student",
+      "target": "role:student",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
+    },
+    {
+      "id": "a1791035565070",
+      "action": "Login successful",
+      "user": "T.Subedi",
+      "userId": "u1791035451368",
+      "userRole": "teacher",
+      "target": "role:teacher",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
+    },
+    {
+      "id": "a1791035503135",
       "action": "Registered on login",
-      "user": "Anurodh Pant",
-      "target": "role:schooladmin · anurodhpant@gmail.com",
+      "user": "A.Pant.3922",
+      "userId": "u1791035503093",
+      "userRole": "student",
+      "target": "role:student · a.pant.3922@westcliff.edu",
       "ip": "192.168.1.72",
       "result": "SUCCESS",
       "time": "just now",
       "icon": "person_add"
     },
     {
-      "id": "a1790853490551",
-      "action": "Login successful",
-      "user": "Anita Sharma",
-      "target": "role:schooladmin",
+      "id": "a1791035477275",
+      "action": "Study Material Uploaded",
+      "user": "T.Subedi",
+      "userId": "u1791035451368",
+      "userRole": "teacher",
+      "target": "6 · Mathematics · grade-6-mathematics.pdf",
       "ip": "192.168.1.72",
       "result": "SUCCESS",
       "time": "just now",
-      "icon": "key"
+      "icon": "upload_file"
     },
     {
-      "id": "a1790852707199",
-      "action": "Login successful",
-      "user": "Anita Sharma",
-      "target": "role:schooladmin",
+      "id": "a1791035451404",
+      "action": "Registered on login",
+      "user": "T.Subedi",
+      "userId": "u1791035451368",
+      "userRole": "teacher",
+      "target": "role:teacher · t.subedi@kmhss.edu.np",
       "ip": "192.168.1.72",
       "result": "SUCCESS",
       "time": "just now",
-      "icon": "key"
+      "icon": "person_add"
     },
     {
-      "id": "a1",
-      "action": "API Token Generated",
+      "id": "a1791035403072",
+      "action": "Registered on login",
+      "user": "Student.Aarav",
+      "userId": "u1791035403031",
+      "userRole": "student",
+      "target": "role:student · student.aarav@kmhss.edu.np",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "person_add"
+    },
+    {
+      "id": "a1791035381466",
+      "action": "Student added",
       "user": "Anurodh Pant",
-      "target": "KTM Model Secondary",
-      "ip": "202.70.76.12",
+      "userId": null,
+      "userRole": "schooladmin",
+      "target": "by:schooladmin",
+      "ip": "192.168.1.72",
       "result": "SUCCESS",
-      "time": "8 mins ago",
+      "time": "just now",
+      "icon": "person_add"
+    },
+    {
+      "id": "a1791035339653",
+      "action": "Registered on login",
+      "user": "Principal",
+      "userId": "u1791035339613",
+      "userRole": "schooladmin",
+      "target": "role:schooladmin · principal@kmhss.edu.np",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "person_add"
+    },
+    {
+      "id": "a1791035320563",
+      "action": "Login successful",
+      "user": "National CDC Admin",
+      "userId": "u1",
+      "userRole": "superadmin",
+      "target": "role:superadmin",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
       "icon": "key"
     },
     {
-      "id": "a2",
-      "action": "CDC Curriculum Index Synced",
-      "user": "System",
-      "target": "Class 9 Mathematics",
-      "ip": "internal",
-      "result": "OK",
-      "time": "24m ago",
-      "icon": "sync"
+      "id": "a1791035298181",
+      "action": "School created",
+      "user": "National CDC Admin",
+      "userId": "u1",
+      "userRole": "superadmin",
+      "target": "Aditya School (AA-123)",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "domain"
     },
     {
-      "id": "a3",
-      "action": "Unauthorized Access Attempt Blocked",
-      "user": "Unknown",
-      "target": "Lalitpur Node Router",
-      "ip": "unknown",
-      "result": "BLOCKED",
-      "time": "1h ago",
-      "icon": "gpp_bad"
+      "id": "a1791035271950",
+      "action": "Login successful",
+      "user": "National CDC Admin",
+      "userId": "u1",
+      "userRole": "superadmin",
+      "target": "role:superadmin",
+      "ip": "192.168.1.72",
+      "result": "SUCCESS",
+      "time": "just now",
+      "icon": "key"
     }
-  ]
+  ],
+  "announcements": [],
+  "schoolCurricula": [],
+  "approvals": [],
+  "systemSettings": {
+    "academicYear": "2082",
+    "baseCurriculumLocked": true,
+    "allowPublicSchoolAdminSignup": false
+  }
 }

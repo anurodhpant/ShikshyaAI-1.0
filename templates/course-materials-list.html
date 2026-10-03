@@ -172,15 +172,7 @@ async function loadClass(cls) {
             <p><span class="font-mono font-bold">${item.chapters || 0}</span> Chapters</p>
             <p class="${fileCount ? 'text-[#16a34a] font-semibold' : ''}"><span class="font-mono font-bold">${fileCount}</span> Uploaded files</p>
           </div>
-          <div class="mt-3">
-            <div class="flex justify-between text-[11px] mb-1">
-              <span class="text-[#45464d]">Topic Mastery</span>
-              <span class="font-mono font-bold">${item.prepared}%</span>
-            </div>
-            <div class="w-full bg-[#e5eeff] rounded-full h-1.5">
-              <div class="h-1.5 rounded-full bg-[#1d4ed8]" style="width:${item.prepared}%"></div>
-            </div>
-          </div>
+          
           <a href="/course-material?class=${encodeURIComponent(cls)}&subject=${encodeURIComponent(item.subject)}"
              class="mt-3 w-full py-2 rounded-lg bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-semibold flex items-center justify-center gap-1.5">
             View Material <span class="material-symbols-outlined text-base">arrow_forward</span>

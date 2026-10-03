@@ -10,16 +10,16 @@
 <link rel="stylesheet" href="/static/css/styles.css"/>
 <style>
   body{font-family:'Plus Jakarta Sans',sans-serif;}
-  .teacher-card{transition:.15s;cursor:pointer;}
+  .teacher-card{transition:.15s;}
   .teacher-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(29,78,216,.10);border-color:#1d4ed8;}
 </style>
 </head>
 <body class="bg-[#f8f9ff] text-[#0b1c30] min-h-screen">
 <div id="layout-root"></div>
 
-<script src="/static/js/api.js"></script>
-<script src="/static/js/nav.js"></script>
-<script src="/static/js/layout.js"></script>
+<script src="/static/js/api.js?v=106"></script>
+<script src="/static/js/nav.js?v=106"></script>
+<script src="/static/js/layout.js?v=106"></script>
 <script>
 document.addEventListener('DOMContentLoaded', async () => {
   let me;
@@ -43,6 +43,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     schoolName, schoolAddr
   });
 
+  // Show "Open Teacher Portal" only for Super Admin and School Admin.
+  // Students and Teachers should NOT see this button.
+  const canOpenPortal = (me.role === 'superadmin' || me.role === 'schooladmin');
+
   const content = window.getPageContent();
   content.innerHTML = `
     <div>
@@ -60,8 +64,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       grid.innerHTML = `<p class="col-span-full text-sm text-[#45464d]">No teachers found.</p>`;
       return;
     }
-    grid.innerHTML = teachers.map(t => `
-      <a href="/teacher-portal?teacherId=${encodeURIComponent(t.id)}" class="teacher-card bg-white border border-[#e2e8f0] rounded-xl p-4 flex flex-col">
+
+    grid.innerHTML = teachers.map(t => {
+      // Inner content of the card (without the Open Portal button)
+      const cardInner = `
         <div class="flex items-center gap-3 mb-3">
           <div class="w-12 h-12 rounded-full bg-[#7c3aed] text-white flex items-center justify-center font-bold">
             ${escHtml(t.avatar || (t.name || 'T').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase())}
@@ -74,15 +80,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             ${escHtml(t.status || 'Active')}
           </span>
         </div>
-        <div class="text-xs text-[#45464d] space-y-1 mb-3">
+        <div class="text-xs text-[#45464d] space-y-1 ${canOpenPortal ? 'mb-3' : ''}">
           <p class="flex items-center gap-1.5 truncate"><span class="material-symbols-outlined text-sm">mail</span>${escHtml(t.email)}</p>
           <p class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">call</span>${escHtml(t.phone || '—')}</p>
-          <p class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">class</span>Classes ${escHtml((t.classes||[]).join(', '))}</p>
+          <p class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">class</span>Classes ${escHtml((t.classes||[]).join(', ') || '—')}</p>
         </div>
-        <span class="mt-auto w-full py-2 rounded-lg bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-semibold flex items-center justify-center gap-1.5">
+      `;
+
+      const portalButton = canOpenPortal ? `
+        <a href="/teacher-portal?teacherId=${encodeURIComponent(t.id)}"
+           class="mt-auto w-full py-2 rounded-lg bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-semibold flex items-center justify-center gap-1.5">
           Open Teacher Portal <span class="material-symbols-outlined text-base">arrow_forward</span>
-        </span>
-      </a>`).join('');
+        </a>
+      ` : '';
+
+      // Wrap the whole card in a link ONLY if the user can open the portal.
+      // Otherwise it's a plain div (not clickable).
+      const wrapperOpen = canOpenPortal
+        ? `<a href="/teacher-portal?teacherId=${encodeURIComponent(t.id)}" class="teacher-card bg-white border border-[#e2e8f0] rounded-xl p-4 flex flex-col">`
+        : `<div class="teacher-card bg-white border border-[#e2e8f0] rounded-xl p-4 flex flex-col">`;
+      const wrapperClose = canOpenPortal ? '</a>' : '</div>';
+
+      return wrapperOpen + cardInner + portalButton + wrapperClose;
+    }).join('');
   } catch (err) {
     document.getElementById('teacherGrid').innerHTML = `<p class="col-span-full text-sm text-[#ba1a1a]">Error: ${escHtml(err.message)}</p>`;
   }
